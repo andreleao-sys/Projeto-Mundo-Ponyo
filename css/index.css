@@ -11,13 +11,25 @@ section {
 #inicio {
     background-color: rgb(35, 122, 154);
 }
+.video-container {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.bg-video {
+    width: 105%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
 #gradient-dark-top {
     position: absolute;
     width: 100%;
-    height: 20%;
+    height: 17%;
     top: 0;
     left: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+    background: linear-gradient(to bottom, rgba(0, 24, 51, 0.8), transparent);
     z-index: 1;
 }
 #navbar {
@@ -68,6 +80,7 @@ section {
     border-radius: 10px;
     border-style: solid;
     border-width: 3px;
+    cursor: pointer;
 }
 .bt_preenchido {
     background-color: #d82e2e;
@@ -78,6 +91,18 @@ section {
     background-color: transparent;
     border-color: whitesmoke;
     color: whitesmoke;
+}
+.bt_preenchido:hover{
+    background-color: transparent;
+    border-color: whitesmoke;
+    color: whitesmoke;
+    transition: 0.3s ease;
+}
+.bt_contorno:hover{
+    background-color: #d82e2e;
+    border-color: #d82e2e;
+    color: whitesmoke;
+    transition: 0.2s ease;
 }
 #sobre_filme {
     background-color: rgb(25, 103, 131);
