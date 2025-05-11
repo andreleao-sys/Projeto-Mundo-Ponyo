@@ -4,6 +4,7 @@ html {
 body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden; 
     color: whitesmoke;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -43,6 +44,7 @@ section {
     align-items: center;
     width: 100%;
     height: 12%;
+    position: fixed;
     z-index: 2;
 }
 #nav_logo {
@@ -68,6 +70,27 @@ section {
 #nav_links a {
     text-decoration: none;
     color: whitesmoke;
+}
+#nav_links li a {
+    position: relative;
+    padding-bottom: 7px;
+}
+#nav_links li a:after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    background-color: whitesmoke;
+    transition: width 0.3s ease;
+}
+#nav_links li a:hover::after,
+#nav-links li a:focus::after {
+    width: 100%;
+}
+#nav_links li a:focus {
+    color: white;
 }
 #nav_buttons {
     width: 15%;
