@@ -74,8 +74,13 @@
             confirmacaoSenhaVar == "" 
         ) {
             cardErro.style.display = "block";
-            mensagem_erro.innerHTML =
-            "(Mensagem de erro para todos os campos em branco)";
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+            finalizarAguardar();
+            return false;
+        } else if (senhaVar != confirmacaoSenhaVar) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "(Ops! As senhas estão diferentes. Tente novamente.)";
 
             finalizarAguardar();
             return false;
