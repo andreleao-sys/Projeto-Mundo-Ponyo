@@ -1,3 +1,13 @@
+/* Importando fontes */
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('../assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+}
+/* ------------------------------------------------------------------------------------------- */
 html {
     scroll-behavior: smooth;
 }
@@ -6,7 +16,9 @@ body {
     padding: 0;
     overflow-x: hidden; 
     color: whitesmoke;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family:'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
 }
 section {
     width: 100%;
@@ -57,13 +69,13 @@ section {
     width: 100%;
 }
 #nav_links {
-    width: 45%;
+    width: 46%;
 }
 #nav_links ul{
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 5%;
+    gap: 5.5%;
     margin: 0;
     padding: 0;
 }
@@ -101,7 +113,7 @@ section {
 .buttons {
     padding: 4% 6%;
     font-size: 100%;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     border-radius: 10px;
     border-style: solid;

@@ -1,9 +1,18 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('../assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+}
+/* ------------------------------------------------------------------------------------------- */
 body {
     background-color: rgb(21, 87, 111);
     color: #d82e2e;
     margin: 0;
     padding: 0;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 #container {
     display: flex;
@@ -23,8 +32,9 @@ body {
     align-items: center;
 }
 #div_titulo {
-    font-size: 35px;
-    font-weight: 900;
+    font-size: 2.3rem;
+    font-family: 'Poppins', sans-serif;
+    /* font-weight: 600; */
     padding-bottom: 5%;
 }
 #corpo_login {
@@ -44,7 +54,7 @@ body {
     width: 100%;
 }
 label {
-    font-weight: 600;
+    font-weight: 700;
 
 }
 input {
@@ -55,10 +65,12 @@ input {
     border-style: solid;
     border-color: rgb(220, 220, 220);
     background-color: whitesmoke;
-    font-size: 17px;
+    font-size: 1rem;
     width: 96%;
     text-indent: 2%;
-    font-size: 100%;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
 }
 input:focus {
     outline: none;
