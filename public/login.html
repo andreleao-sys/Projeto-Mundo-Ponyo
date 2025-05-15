@@ -12,29 +12,30 @@
 </head>
 <body>
     <div id="container">
-
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
-        </div>
-
         <div id="div_login">
             <div id="div_titulo">
                 Login
             </div>
             <div id="corpo_login">
-                <div id="div_email">
-                    <label>E-mail:</label>
-                    <input type="text" id="iptEmail">
+                <div id="div_email" class="div_input">
+                    <label>E-mail</label>
+                    <input type="text" id="iptEmail" placeholder="Ex: andrezin@gmail.com">
                 </div>
-                <div id="div_senha">
-                    <label>Senha:</label>
-                    <input type="password" id="iptSenha">
+                <div id="div_senha" class="div_input" >
+                    <label>Senha</label>
+                    <input type="password" id="iptSenha" placeholder="Senha de acesso">
                 </div>
                 <div id="div_button">
                     <button onclick="entrar()">Entrar</button>
                 </div>
+            </div>
+            <div id="div_fazerCadastro">
+                Não tem conta? <a href="cadastro.html">Faça seu cadastro!</a>
+            </div>
+
+            <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
             </div>
         </div>
     </div>

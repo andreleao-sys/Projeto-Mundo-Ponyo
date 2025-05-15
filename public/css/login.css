@@ -1,0 +1,94 @@
+body {
+    background-color: rgb(21, 87, 111);
+    color: #d82e2e;
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22vh;
+}
+#div_login {
+    background-color: white;
+    width: 30%;
+    height: 60vh;
+    border-radius: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#div_titulo {
+    font-size: 35px;
+    font-weight: 900;
+    padding-bottom: 5%;
+}
+#corpo_login {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+#div_email {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#div_senha {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+label {
+    font-weight: 600;
+
+}
+input {
+    height: 2.3rem;
+    margin-top: 2%;
+    border-width: 3px;
+    border-radius: 7px;
+    border-style: solid;
+    border-color: rgb(220, 220, 220);
+    background-color: whitesmoke;
+    font-size: 17px;
+    width: 96%;
+    text-indent: 2%;
+    font-size: 100%;
+}
+input:focus {
+    outline: none;
+    border-color: #02787e62;
+}
+#div_button {
+    width: 100%;
+    height: 7vh;
+}
+button {
+    padding: 4% 5%;
+    height: 100%;
+    width: 99.5%;
+    border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    background-color: #d82e2e;
+    color: whitesmoke;
+    font-size: 100%;
+    font-weight: 600;
+}
+button:hover {
+    background-color: #be2121;
+}
+#div_fazerCadastro {
+    color: rgb(39, 43, 52);
+    font-size: 90%;
+    padding-top: 5%;
+}
+/* .alerta_erro {
+    color: whitesmoke;
+    font-style: italic;
+} */
