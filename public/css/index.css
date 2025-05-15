@@ -130,6 +130,12 @@ section {
     color: whitesmoke;
     transition: 0.2s ease;
 }
+/*NAVBAR - SCROLL*/
+#navbar.scrolled {
+    background-color: rgba(0, 65, 95, 0.298);
+    transition: 0.5s ease;
+    backdrop-filter: blur(8px);
+}
 #sobre_filme {
     background-color: rgb(25, 103, 131);
 }

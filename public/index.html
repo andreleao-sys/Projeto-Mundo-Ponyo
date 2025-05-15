@@ -46,3 +46,25 @@
     <section id="desenvolvedor">Desenvolvedor</section>
 </body>
 </html>
+
+<script>
+    //Faz com que o site faça a mudança de foma manual
+    //Assim quando a pagina atualizar ele voltará ao topo do site
+    //IMPEDINDO O SCROLL AUTOMÁTICO PARA AS DEMAIS SEÇÕES
+    history.scrollRestoration = 'manual';
+</script>
+
+<script>
+    //FIXA A NAVBAR NO TOP E PERMITE QUE COM A FUNÇÃO .SCROLLED
+    //ALTEMAMOS O FUNDO DA NAVBAR
+    window.addEventListener('scroll', function () {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+            // nav_logotipo_soytrack.src = 'img/Logo-SoyTrack/logotipoSoyTrackCOLORIDA.png';
+        } else {
+            navbar.classList.remove('scrolled');
+            // nav_logotipo_soytrack.src = 'img/Logo-SoyTrack/logotipoSoyTrackBRANCA.png';
+        }
+    });
+</script>
