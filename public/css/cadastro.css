@@ -1,0 +1,35 @@
+#container {
+    margin-top: 8vh;
+}
+
+#div_cadastro {
+    background-color: white;
+    width: 35%;
+    height: 85vh;
+    border-radius: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#corpo_cadastro {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+/* #div_email {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#div_senha {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+} */
+#div_confirmarSenha {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}

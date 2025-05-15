@@ -7,17 +7,12 @@
     <script src="./js/sessao.js"></script>
 
     <link rel="shortcut icon" type="imagex/png" href="./img/ponyo-icone.png">
+    <link rel="stylesheet" type="text/css" href="css/login.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/cadastro.css" media="screen" />
     <title>Mundo Ponyo | Cadastro</title>
 </head>
 <body>
     <div id="container">
-
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
-        </div>
 
         <div id="div_cadastro">
             <div id="div_titulo">
@@ -30,7 +25,7 @@
                 </div>
                 <div id="div_email">
                     <label>E-mail:</label>
-                    <input type="text" id="iptEmail" placeholder="andre@gmail.com">
+                    <input type="text" id="iptEmail" placeholder="Ex: andre@gmail.com">
                 </div>
                 <div id="div_senha">
                     <label>Senha:</label>
@@ -45,8 +40,17 @@
                 </div>
             </div>
 
-            <div id="div_aguardar" class="loading-div">
+            <div id="div_fazerCadastro">
+                Já possui conta? <a href="login.html">Acessar Conta!</a>
+            </div>
+            <!-- <div id="div_aguardar" class="loading-div">
                 <img src="./assets/circle-loading.gif" id="loading-gif" />
+            </div> -->
+
+            <div class="alerta_erro">
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
             </div>
 
             <div id="div_erros_login"></div>
