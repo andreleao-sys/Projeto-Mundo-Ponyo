@@ -41,7 +41,9 @@
     </section>
     <section id="sobre_filme">Sobre o Filme</section>
     <section id="hayao_miyazaki">Hayao Miyazaki</section>
-    <section id="galeria">Galeria</section>
+    <section id="galeria">Galeria
+        <button id="btCadastro" class="bt_preenchido buttons" onclick="verificarLogin()">Ver mais</button>
+    </section>
     <section id="quiz">Quiz</section>
     <section id="desenvolvedor">Desenvolvedor</section>
 </body>
@@ -52,9 +54,8 @@
     //Assim quando a pagina atualizar ele voltará ao topo do site
     //IMPEDINDO O SCROLL AUTOMÁTICO PARA AS DEMAIS SEÇÕES
     history.scrollRestoration = 'manual';
-</script>
 
-<script>
+    
     //FIXA A NAVBAR NO TOP E PERMITE QUE COM A FUNÇÃO .SCROLLED
     //ALTEMAMOS O FUNDO DA NAVBAR
     window.addEventListener('scroll', function () {
@@ -67,4 +68,20 @@
             // nav_logotipo_soytrack.src = 'img/Logo-SoyTrack/logotipoSoyTrackBRANCA.png';
         }
     });
+
+    //VERIFICANDO SE O USUÁRIO ESTÁ LOGADO
+    function verificarLogin() {
+        var idUsuario = sessionStorage.getItem("ID_USUARIO");
+        var email = sessionStorage.getItem("EMAIL_USUARIO");
+        var nome = sessionStorage.getItem("NOME_USUARIO");
+
+        // console.log(idUsuario + email +  nome);
+        console.log(sessionStorage);
+        if (sessionStorage.length <= 1) {
+            alert('Para ver mais fotos, faça seu cadastro!');
+            window.location.href='cadastro.html';
+        } else {
+            window.location.href='galeria.html';
+        }
+    }
 </script>
