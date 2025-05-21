@@ -49,86 +49,85 @@
 </body>
 </html>
 <script>
-
+    
     //JOGO
+    var pontuacao = 0;
+
+    //Selecionando elementos HTML
     const ponyo = document.querySelector('.ponyo');
     const obstaculo = document.querySelector('.obstaculo');
     const start = document.querySelector('#start');
     const gameOver = document.querySelector('.game_over');
 
     const jump = () => {
-        ponyo.classList.add('jump');
+        ponyo.classList.add('jump'); //Adiciona a classe 'jump' (ativando a animação de pulo no css)
 
         setTimeout(() => {
-            ponyo.classList.remove('jump');
+            ponyo.classList.remove('jump'); //Remove a classe após 0.5 segundos (500ms) fazendo a ponyo voltar ao chão
         }, 500);
     }
-    var pontuacao = 0;
+
     const startGame = () => {
 
-        gameOver.style.display = 'none';
-        obstaculo.style.display = 'flex';
-        start.style.display = 'none';
+        gameOver.style.display = 'none'; //Esconde a tela de game over
+        obstaculo.style.display = 'flex'; //Deixa os obstáculos visíveis
+        start.style.display = 'none'; //Esconde o botão de iniciar
         
         const loop = setInterval(() => {
-            const obstaculoPosition = obstaculo.offsetLeft;
-            const ponyoPosition = Number(window.getComputedStyle(ponyo).bottom.replace('px', ''));
-            
-            // obstaculo.getComputedStyle('.obstaculo-animation')
+            const obstaculoPosition = obstaculo.offsetLeft; //Pega a posição horizontal do obstáculo
+            const ponyoPosition = Number(window.getComputedStyle(ponyo).bottom.replace('px', '')); //Posição vertical da Ponyo
             
             console.log(obstaculoPosition);
-            // console.log(ponyPosition)
+
+            //Verifica a colisão
             if (obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) {
 
-                gameOver.style.display = 'flex';
-                // document.body.style.overflow = 'hidden';
+                gameOver.style.display = 'flex'; //Mostra a tela de game over
 
+                //Congela o obstáculo e a Ponyo na posição da colisão
                 obstaculo.style.animation = 'none';
                 obstaculo.style.left = `${obstaculoPosition}px`;
-                
                 ponyo.style.animation = 'none';
                 ponyo.style.bottom = `${ponyoPosition}px`;
                 
+                //Altera a imagem da Ponyo para game over
                 ponyo.src = 'assets/img/ponyo-game-over.png';
                 ponyo.style.width = '90px';
                 ponyo.style.marginLeft = '20px';
                 
-                clearInterval(loop);
+                clearInterval(loop); //Para loop do jogo
             } else {
-                pontuacao = pontuacao + 0.1;
-                h1_pontuacao.innerHTML = `${pontuacao.toFixed()} m`;
+                pontuacao = pontuacao + 0.1; //Incrementa a pontuacão
+                h1_pontuacao.innerHTML = `${pontuacao.toFixed()} m`; //Atualiza ao placar
             }
         }, 10); // 10 miilisegundos = 0.01 segundo
-}
-
-    //FUNÇÃO DE REINICIAR AINDA EM CONSTRUÇÃO
-    const restartGame = () => {
-    gameOver.style.display = 'none';
-    
-    // // gameOver.style.display = 'flex';
-    
-    // // obstaculo.style.animation = 'none';
-    // // obstaculo.style.marginLeft = ''
-    // // obstaculo.style.marginRight = '0'
-        
-        // ponyo.src = 'assets/img/ponyo.gif';
-        // ponyo.style.width = '7.5%';
-        // ponyo.style.marginLeft = '0';
-        // ponyo.style.bottom = '0';
-        
-        // // obstaculo.offsetHeight;
-        // obstaculo.style.animation = 'obstaculo-animation 2s infinite linear';
-        // obstaculo.style.display = 'flex';
-
-        // // clearInterval(loop);
-
-        // startGame();
-        window.location.reload('');
-        startGame();
     }
 
+    //Função de reiniciar
+    const restartGame = () => {
+        gameOver.style.display = 'none'; //Esconde a tela de game over
+        
+        //Reseta a Ponyo
+        ponyo.src = 'assets/img/ponyo.gif'; //Volta o gif original
+        ponyo.style.width = '7.5%'; //Volta ao tamanho original
+        ponyo.style.marginLeft = '0'; //Remove a margin que foi adicionada no momento da colisão
+        ponyo.style.bottom = '0px'; //Reinicia a posição vertical
+
+        //Reseta o obstáculo
+        obstaculo.style.display = 'flex'; //Garante que está visível
+        obstaculo.style.left = ''; //Remove a posição fixa da colisão
+        obstaculo.style.animation = 'obstaculo-animation 2s infinite linear'; //Reinicia a animação
+
+        //Reseta a pontuação
+        pontuacao = 0;
+        h1_pontuacao.innerHTML = '0 m';
+
+        startGame();
+    }
+    
+    //Sair do jogo
     function stopGame() {
-        window.location.href = 'index.html';
+        window.location.reload('');
     }
 
     document.addEventListener('keydown', jump);
