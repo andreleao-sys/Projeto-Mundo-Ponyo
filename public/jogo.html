@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="./js/sessao.js"></script>
+    
+    <link rel="shortcut icon" type="imagex/png" href="assets/img/ponyo-icone.png">
+    <link rel="stylesheet" type="text/css" href="css/index.css" media="screen" />
+    <title>Mundo Ponyo</title>
+</head>
+<body>
+    
+    <section id="jogo">
+        <div class="nav_lateral">
+
+        </div>
+        <div class="div_jogo">
+
+            <div class="game_board">
+                <div id="gradient-cenario-top"></div>
+                <div class="div_indicadores_jogo">
+                    <div id="div_tempo">
+                        <h1>00:00:00</h1>
+                    </div>
+                    <div id="div_pontuacao">
+                        <h1 id="h1_pontuacao">0 m</h1>
+                    </div>
+                </div>
+                <div id="gradient-cenario-bottom"></div>
+                <img src="assets/img/cenario-jogo-ponyo.png" class="cenario">
+                <!-- <img src="assets/img/clouds.png" class="clouds"> -->
+                <img src="assets/img/ponyo.gif" class="ponyo">
+                <img src="assets/img/onda.gif" class="obstaculo">
+                <div id="div_btIniciar">
+                    <button onclick="startGame()" id="start" class="bt_preenchido buttons btIniciar">INICIAR</button>
+                </div>
+                <div class="game_over">
+                    <h1>Game Over</h1>
+                    <div class="buttons_gameOver">
+                        <button onclick="restartGame()" id="restart" class="bt_preenchido buttons btReiniciar">Reiniciar</button>
+                        <button onclick="stopGame()" id="restart" class="bt_preenchido buttons btReiniciar">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+<script>
+
+    //JOGO
+    const ponyo = document.querySelector('.ponyo');
+    const obstaculo = document.querySelector('.obstaculo');
+    const start = document.querySelector('#start');
+    const gameOver = document.querySelector('.game_over');
+
+    const jump = () => {
+        ponyo.classList.add('jump');
+
+        setTimeout(() => {
+            ponyo.classList.remove('jump');
+        }, 500);
+    }
+    var pontuacao = 0;
+    const startGame = () => {
+
+        gameOver.style.display = 'none';
+        obstaculo.style.display = 'flex';
+        start.style.display = 'none';
+        
+        const loop = setInterval(() => {
+            const obstaculoPosition = obstaculo.offsetLeft;
+            const ponyoPosition = Number(window.getComputedStyle(ponyo).bottom.replace('px', ''));
+            
+            // obstaculo.getComputedStyle('.obstaculo-animation')
+            
+            console.log(obstaculoPosition);
+            // console.log(ponyPosition)
+            if (obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) {
+
+                gameOver.style.display = 'flex';
+                // document.body.style.overflow = 'hidden';
+
+                obstaculo.style.animation = 'none';
+                obstaculo.style.left = `${obstaculoPosition}px`;
+                
+                ponyo.style.animation = 'none';
+                ponyo.style.bottom = `${ponyoPosition}px`;
+                
+                ponyo.src = 'assets/img/ponyo-game-over.png';
+                ponyo.style.width = '90px';
+                ponyo.style.marginLeft = '20px';
+                
+                clearInterval(loop);
+            } else {
+                pontuacao = pontuacao + 0.1;
+                h1_pontuacao.innerHTML = `${pontuacao.toFixed()} m`;
+            }
+        }, 10); // 10 miilisegundos = 0.01 segundo
+}
+
+    //FUNÇÃO DE REINICIAR AINDA EM CONSTRUÇÃO
+    const restartGame = () => {
+    gameOver.style.display = 'none';
+    
+    // // gameOver.style.display = 'flex';
+    
+    // // obstaculo.style.animation = 'none';
+    // // obstaculo.style.marginLeft = ''
+    // // obstaculo.style.marginRight = '0'
+        
+        // ponyo.src = 'assets/img/ponyo.gif';
+        // ponyo.style.width = '7.5%';
+        // ponyo.style.marginLeft = '0';
+        // ponyo.style.bottom = '0';
+        
+        // // obstaculo.offsetHeight;
+        // obstaculo.style.animation = 'obstaculo-animation 2s infinite linear';
+        // obstaculo.style.display = 'flex';
+
+        // // clearInterval(loop);
+
+        // startGame();
+        window.location.reload('');
+        startGame();
+    }
+
+    function stopGame() {
+        window.location.href = 'index.html';
+    }
+
+    document.addEventListener('keydown', jump);
+
+    
+</script>

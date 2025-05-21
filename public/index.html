@@ -159,20 +159,21 @@
         // gameOver.style.display = 'flex';
 
         // obstaculo.style.animation = 'none';
-        // obstaculo.style.right = `-10%`;
+        // obstaculo.style.marginLeft = ''
+        // obstaculo.style.marginRight = '0'
         
-        // ponyo.src = 'assets/img/ponyo.gif';
-        // ponyo.style.width = '7.5%';
-        // ponyo.style.marginLeft = '0';
-        // ponyo.style.bottom = `0%`;
+        ponyo.src = 'assets/img/ponyo.gif';
+        ponyo.style.width = '7.5%';
+        ponyo.style.marginLeft = '0';
+        ponyo.style.bottom = '0';
 
         // obstaculo.offsetHeight;
-        // obstaculo.style.animation = 'obstaculo-animation 2s infinite linear';
-        // obstaculo.style.display = 'flex';
+        obstaculo.style.animation = 'obstaculo-animation 2s infinite linear';
+        obstaculo.style.display = 'flex';
 
         // clearInterval(loop);
 
-        // startGame();
+        startGame();
     }
 
     document.addEventListener('keydown', jump);
