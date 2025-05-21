@@ -47,20 +47,7 @@
     </section>
     <section id="quiz">Quiz</section>
     <section id="jogo">
-        <div class="game_board">
-            <div id="gradient-cenario"></div>
-            <img src="assets/img/cenario-jogo-ponyo.png" class="cenario">
-            <!-- <img src="assets/img/clouds.png" class="clouds"> -->
-            <img src="assets/img/ponyo.gif" class="ponyo">
-            <img src="assets/img/onda.gif" class="obstaculo">
-            <div id="div_btIniciar">
-                <button onclick="startGame()" id="start" class="bt_preenchido buttons btIniciar">INICIAR</button>
-            </div>
-        </div>
-        <div class="game_over">
-            <h1>Game Over</h1>
-            <button onclick="restartGame()" id="restart" class="bt_preenchido buttons btReiniciar">Reiniciar</button>
-        </div>
+        
     </section>
     <section id="desenvolvedor">Desenvolvedor</section>
 </body>
@@ -102,79 +89,4 @@
         }
     }
 
-    //JOGO
-    const ponyo = document.querySelector('.ponyo');
-    const obstaculo = document.querySelector('.obstaculo');
-    const start = document.querySelector('#start');
-    const gameOver = document.querySelector('.game_over');
-
-    const jump = () => {
-        ponyo.classList.add('jump');
-
-        setTimeout(() => {
-            ponyo.classList.remove('jump');
-        }, 500);
-    }
-
-    const startGame = () => {
-
-        obstaculo.style.display = 'flex';
-        start.style.display = 'none';
-        
-        const loop = setInterval(() => {
-            const obstaculoPosition = obstaculo.offsetLeft;
-            const ponyoPosition = Number(window.getComputedStyle(ponyo).bottom.replace('px', ''));
-            
-            // obstaculo.getComputedStyle('.obstaculo-animation')
-            
-            console.log(obstaculoPosition);
-            // console.log(ponyPosition)
-            if (obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) {
-
-                gameOver.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-
-                obstaculo.style.animation = 'none';
-                obstaculo.style.left = `${obstaculoPosition}px`;
-                
-                ponyo.style.animation = 'none';
-                ponyo.style.bottom = `${ponyoPosition}px`;
-                
-                ponyo.src = 'assets/img/ponyo-game-over.png';
-                ponyo.style.width = '90px';
-                ponyo.style.marginLeft = '20px';
-                
-                clearInterval(loop);
-        } else {
-            
-        }
-        }, 10);
-
-    }
-
-    //FUNÇÃO DE REINICIAR AINDA EM CONSTRUÇÃO
-    const restartGame = () => {
-        gameOver.style.display = 'none';
-    
-        // gameOver.style.display = 'flex';
-
-        // obstaculo.style.animation = 'none';
-        // obstaculo.style.marginLeft = ''
-        // obstaculo.style.marginRight = '0'
-        
-        ponyo.src = 'assets/img/ponyo.gif';
-        ponyo.style.width = '7.5%';
-        ponyo.style.marginLeft = '0';
-        ponyo.style.bottom = '0';
-
-        // obstaculo.offsetHeight;
-        obstaculo.style.animation = 'obstaculo-animation 2s infinite linear';
-        obstaculo.style.display = 'flex';
-
-        // clearInterval(loop);
-
-        startGame();
-    }
-
-    document.addEventListener('keydown', jump);
 </script>

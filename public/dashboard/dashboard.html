@@ -1,318 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Dashboards</title>
 
+    <script src="./js/sessao.js"></script>
     
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
-    <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <!-- scripts do Chart.js - 2022-1 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!--FONT AWESOME-->
-    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="imagex/png" href="assets/img/ponyo-icone.png">
+    <link rel="stylesheet" type="text/css" href="../css/index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../css/dashboards.css" media="screen" />
+    <title>Mundo Ponyo</title>
 </head>
-
-<!-- <body onload=" atualizarFeed()"> -->
-
 <body>
-
-    <div class="janela">
-        <div class="header-left">
-            <h1>AquaTech</h1>
-
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./cards.html">
-                    <h3>Aquários</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav">
-
-                <h3>Gráficos</h3>
-
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
+    
+    <section id="jogo">
+        <div class="nav_lateral">
 
         </div>
+        <div class="div_jogo">
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
-
-            <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-            </div>
-            <div id="graficos">
-            </div>
-        </div>
-    </div>
-
-
-</body>
-
-</html>
-
-<script>
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
-    let proximaAtualizacao;
-
-    window.onload = exibirAquariosDoUsuario();
-
-    function exibirAquariosDoUsuario() {
-        var aquarios = JSON.parse(sessionStorage.AQUARIOS);
-        aquarios.forEach(item => {
-            document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-            `
-
-            document.getElementById("graficos").innerHTML += `
-                <div id="grafico${item.id}" class="display-none">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.id}">${item.descricao}</span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas${item.id}"></canvas>
+            <div class="game_board">
+                <div id="gradient-cenario-top"></div>
+                <div class="div_indicadores_jogo">
+                    <div id="div_tempo">
+                        <!-- <h1>00:00:00</h1> -->
                     </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura${item.id}" style="color: white"></p>
+                    <div id="div_pontuacao">
+                        <h1 id="h1_pontuacao">0 m</h1>
                     </div>
                 </div>
-            `
+                <div id="gradient-cenario-bottom"></div>
+                <img src="../assets/img/cenario-jogo-ponyo.png" class="cenario">
+                <!-- <img src="assets/img/clouds.png" class="clouds"> -->
+                <img src="../assets/img/ponyo.gif" class="ponyo">
+                <img src="../assets/img/onda.gif" class="obstaculo">
+                <div id="div_btIniciar">
+                    <button onclick="startGame()" id="start" class="bt_preenchido buttons btIniciar">INICIAR</button>
+                </div>
+                <div class="game_over">
+                    <h1>Game Over</h1>
+                    <div class="buttons_gameOver">
+                        <button onclick="restartGame()" id="restart" class="bt_preenchido buttons btReiniciar">Reiniciar</button>
+                        <button onclick="stopGame()" id="restart" class="bt_preenchido buttons btReiniciar">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+<script>
+    
+    //JOGO
+    var pontuacao = 0;
 
-            obterDadosGrafico(item.id)
-        });
+    //Selecionando elementos HTML
+    const ponyo = document.querySelector('.ponyo');
+    const obstaculo = document.querySelector('.obstaculo');
+    const start = document.querySelector('#start');
+    const gameOver = document.querySelector('.game_over');
 
-        if (aquarios.length > 0) {
-            exibirAquario(aquarios[0].id)
-        }
+    const jump = () => {
+        ponyo.classList.add('jump'); //Adiciona a classe 'jump' (ativando a animação de pulo no css)
+
+        setTimeout(() => {
+            ponyo.classList.remove('jump'); //Remove a classe após 0.5 segundos (500ms) fazendo a ponyo voltar ao chão
+        }, 500);
     }
 
-    function alterarTitulo(idAquario) {
-        var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    }
+    const startGame = () => {
 
-    function exibirAquario(idAquario) {
-        let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
+        gameOver.style.display = 'none'; //Esconde a tela de game over
+        obstaculo.style.display = 'flex'; //Deixa os obstáculos visíveis
+        start.style.display = 'none'; //Esconde o botão de iniciar
+        
+        const loop = setInterval(() => {
+            const obstaculoPosition = obstaculo.offsetLeft; //Pega a posição horizontal do obstáculo
+            const ponyoPosition = Number(window.getComputedStyle(ponyo).bottom.replace('px', '')); //Posição vertical da Ponyo
+            
+            console.log(obstaculoPosition);
 
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != idAquario) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
+            //Verifica a colisão
+            if (obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) {
 
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
-            }
-        }
+                gameOver.style.display = 'flex'; //Mostra a tela de game over
 
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idAquario}`)
-        graficoExibir.classList.remove("display-none")
-        graficoExibir.classList.add("display-block")
-
-        // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${idAquario}`)
-        btnExibir.classList.remove("btn-white")
-        btnExibir.classList.add("btn-pink")
-    }
-
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idAquario) {
-
-        alterarTitulo(idAquario)
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    plotarGrafico(resposta, idAquario);
-
-                });
+                //Congela o obstáculo e a Ponyo na posição da colisão
+                obstaculo.style.animation = 'none';
+                obstaculo.style.left = `${obstaculoPosition}px`;
+                ponyo.style.animation = 'none';
+                ponyo.style.bottom = `${ponyoPosition}px`;
+                
+                //Altera a imagem da Ponyo para game over
+                ponyo.src = '../assets/img/ponyo-game-over.png';
+                ponyo.style.width = '90px';
+                ponyo.style.marginLeft = '20px';
+                
+                clearInterval(loop); //Para loop do jogo
             } else {
-                console.error('Nenhum dado encontrado ou erro na API');
+                pontuacao = pontuacao + 0.1; //Incrementa a pontuacão
+                h1_pontuacao.innerHTML = `${pontuacao.toFixed()} m`; //Atualiza ao placar
             }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+        }, 10); // 10 miilisegundos = 0.01 segundo
     }
 
-    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idAquario) {
+    //Função de reiniciar
+    const restartGame = () => {
+        gameOver.style.display = 'none'; //Esconde a tela de game over
+        
+        //Reseta a Ponyo
+        ponyo.src = '../assets/img/ponyo.gif'; //Volta o gif original
+        ponyo.style.width = '7.5%'; //Volta ao tamanho original
+        ponyo.style.marginLeft = '0'; //Remove a margin que foi adicionada no momento da colisão
+        ponyo.style.bottom = '0px'; //Reinicia a posição vertical
 
-        console.log('iniciando plotagem do gráfico...');
+        //Reseta o obstáculo
+        obstaculo.style.display = 'flex'; //Garante que está visível
+        obstaculo.style.left = ''; //Remove a posição fixa da colisão
+        obstaculo.style.animation = 'obstaculo-animation 2s infinite linear'; //Reinicia a animação
 
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
+        //Reseta a pontuação
+        pontuacao = 0;
+        h1_pontuacao.innerHTML = '0 m';
 
-        // Criando estrutura para plotar gráfico - dados
-        let dados = {
-            labels: labels,
-            datasets: [{
-                label: 'Umidade',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            },
-            {
-                label: 'Temperatura',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(199, 52, 52)',
-                tension: 0.1
-            }]
-        };
-
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
-
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
-        }
-
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados,
-        };
-
-        // Adicionando gráfico criado em div na tela
-        let myChart = new Chart(
-            document.getElementById(`myChartCanvas${idAquario}`),
-            config
-        );
-
-        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+        startGame();
+    }
+    
+    //Sair do jogo
+    function stopGame() {
+        window.location.reload('');
     }
 
+    document.addEventListener('keydown', jump);
 
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idAquario, dados, myChart) {
-
-
-
-        fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
-
-                    obterdados(idAquario);
-                    // alertar(novoRegistro, idAquario);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
-
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
-                    avisoCaptura.innerHTML = ""
-
-
-                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------")
-                    } else {
-                        // tirando e colocando valores no gráfico
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
-
-                        dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                        dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-                        myChart.update();
-                    }
-
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-    }
+    
 </script>
