@@ -84,6 +84,12 @@
     top: 45%;
     left: 43%;
 }
+.buttons_gameOver {
+    gap: 1%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .btIniciar {
     padding: 20% 30%;
     font-size: 150%;
@@ -107,7 +113,7 @@
 .game_over {
     width: 74.7%;
     height: 78.2vh;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -117,8 +123,20 @@
     /* top: 17%; */
     display: none;
 }
-.game_over h1 {
-    font-size: 350%;
+#titulo_gameOver {
+    font-size: 400%;
+    font-weight: 800;
+    padding-bottom: 2%;
+}
+.score {
+    font-size: 250%;
+    font-weight: 700;
+    padding-bottom: 2%;
+}
+.recorde {
+    font-size: 150%;
+    font-weight: 700;
+    padding-bottom: 3%;
 }
 .btReiniciar {
     padding: 1% 2%;
