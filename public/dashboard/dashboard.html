@@ -113,6 +113,8 @@
                 ponyo.style.marginLeft = '20px';
                 
                 clearInterval(loop); //Para loop do jogo
+
+                cadastrarPartida();
             } else {
                 pontuacao = pontuacao + 0.1; //Incrementa a pontuacão
                 h1_pontuacao.innerHTML = `${pontuacao.toFixed()} m`; //Atualiza ao placar
@@ -155,6 +157,37 @@
     }
 
     document.addEventListener('keydown', jump);
+
+    function cadastrarPartida() {
+        var fkUsuario = sessionStorage.getItem("ID_USUARIO");
+        var pontuacaoVar = Number(pontuacao.toFixed());
+        console.log(fkUsuario, pontuacaoVar)
+
+        fetch("/dashboard/cadastrarPartida", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                fkUsuarioServer: fkUsuario,
+                pontuacaoServer: pontuacaoVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    console.log('Partida cadastrada com sucesso! ✅')
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+            return false;
+    }
 
     
 </script>
