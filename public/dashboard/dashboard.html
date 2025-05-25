@@ -17,12 +17,17 @@
             <div class="div_logoMundoPonyo">
                 <img id="imgMundoPonyo" src="../assets/img/logo-mundo-ponyo.png" alt="Mundo Ponyo">
             </div>
-            <div id="div_bemVindo">Bem vindo, André</div>
-            <div id="div_links">
-
+            <div id="div_bemVindo">Bem vindo de volta!</div>
+            <div id="containerLinks">
+                <div class="div_links">
+                    <div class="link">Dashboard</div>
+                    <div class="link">Galeria</div>
+                    <div class="link">Jogo</div>
+                    <div class="link">Ranking</div>
+                </div>
             </div>
             <div id="div_sair">
-
+                <div class="conteudo_sair">SAIR</div>
             </div>
         </div>
         <div class="conteudo_jogo">
@@ -42,7 +47,7 @@
                 <img src="../assets/img/cenario-jogo-ponyo.png" class="cenario">
                 <!-- <img src="assets/img/clouds.png" class="clouds"> -->
                 <img src="../assets/img/ponyo.gif" class="ponyo">
-                <img src="../assets/img/onda.gif" class="obstaculo">
+                <img src="../assets/img/onda1.1.gif" class="obstaculo">
                 <div id="div_btIniciar">
                     <button onclick="startGame()" id="start" class="bt_preenchido buttons btIniciar">INICIAR</button>
                 </div>
@@ -65,9 +70,12 @@
 </body>
 </html>
 <script>
+    div_bemVindo.innerHTML = `Olá,&nbsp <b>${sessionStorage.NOME_USUARIO}</b>`;
     
     //JOGO
     var pontuacao = 0;
+    var indiceVelocidade = 0;
+    var tempoDaOnda = 2.5;
 
     //Selecionando elementos HTML
     const ponyo = document.querySelector('.ponyo');
@@ -90,10 +98,11 @@
         start.style.display = 'none'; //Esconde o botão de iniciar
         
         const loop = setInterval(() => {
+
             const obstaculoPosition = obstaculo.offsetLeft; //Pega a posição horizontal do obstáculo
             const ponyoPosition = Number(window.getComputedStyle(ponyo).bottom.replace('px', '')); //Posição vertical da Ponyo
             
-            console.log(obstaculoPosition);
+            console.log('onda:' + obstaculoPosition);
 
             //Verifica a colisão
             if (obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) {
@@ -109,14 +118,34 @@
                 
                 //Altera a imagem da Ponyo para game over
                 ponyo.src = '../assets/img/ponyo-game-over.png';
-                ponyo.style.width = '90px';
-                ponyo.style.marginLeft = '20px';
+                ponyo.style.width = '80px';
+                ponyo.style.marginLeft = '30px';
                 
                 clearInterval(loop); //Para loop do jogo
 
                 cadastrarPartida();
             } else {
-                pontuacao = pontuacao + 0.1; //Incrementa a pontuacão
+                indiceVelocidade = Number((indiceVelocidade + 0.035).toFixed(2));
+                console.log('i: ' + indiceVelocidade);
+                console.log('temp onda: ' + tempoDaOnda);
+                if (indiceVelocidade > 50.99 && obstaculoPosition < -50 && tempoDaOnda == 2.5) {
+                    tempoDaOnda -= 0.3;
+                    // // 1. Pausa a animação e congela a posição atual
+                    obstaculo.style.animation = 'none';
+                    void obstaculo.offsetWidth; // Truque mágico (força a pausa)
+
+                    obstaculo.style.animation = `obstaculo-animation ${tempoDaOnda}s infinite linear`;
+                    indiceVelocidade = 0;
+                } else if (indiceVelocidade > 50.99 && obstaculoPosition < -50 && tempoDaOnda >= 1.4) {
+                    tempoDaOnda -= 0.4;
+                    // // 1. Pausa a animação e congela a posição atual
+                    obstaculo.style.animation = 'none';
+                    void obstaculo.offsetWidth; // Truque mágico (força a pausa)
+                    
+                    obstaculo.style.animation = `obstaculo-animation ${tempoDaOnda}s infinite linear`;
+                    indiceVelocidade = 0;
+                }
+                pontuacao = pontuacao + 0.035; //Incrementa a pontuacão
                 h1_pontuacao.innerHTML = `${pontuacao.toFixed()} m`; //Atualiza ao placar
             }
         }, 10); // 10 miilisegundos = 0.01 segundo
@@ -137,11 +166,14 @@
         //Reseta o obstáculo
         obstaculo.style.display = 'flex'; //Garante que está visível
         obstaculo.style.left = ''; //Remove a posição fixa da colisão
-        obstaculo.style.animation = 'obstaculo-animation 2s infinite linear'; //Reinicia a animação
+        obstaculo.style.animation = 'obstaculo-animation 2.5s infinite linear'; //Reinicia a animação
 
         //Reseta a pontuação
         pontuacao = 0;
         h1_pontuacao.innerHTML = '0 m';
+
+        indiceVelocidade = 0;
+        tempoDaOnda = 2.5;
 
         //Removendo e readicionando o pulo pra certificar que funcione corretamente
         document.removeEventListener('keydown', jump);
@@ -158,6 +190,8 @@
 
     document.addEventListener('keydown', jump);
 
+
+    //Cadastrando partida no banco de dados
     function cadastrarPartida() {
         var fkUsuario = sessionStorage.getItem("ID_USUARIO");
         var pontuacaoVar = Number(pontuacao.toFixed());
@@ -188,6 +222,8 @@
 
             return false;
     }
+
+
 
     
 </script>

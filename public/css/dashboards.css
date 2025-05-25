@@ -45,26 +45,25 @@ section {
     transition: 0.3s ease;
 }
 #jogo {
-    background-color: rgb(1, 23, 31);
     display: flex;
     /* justify-content: center; */
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-color: rgb(0, 17, 28);
+    background-color: rgb(0, 30, 48);
 }
 .nav_lateral {
     width: 17%;
     height: 100vh;
-    background-color: rgb(0, 33, 48);
+    background-color: rgb(0, 36, 56);
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 .div_logoMundoPonyo {
     width: 100%;
-    height: 17vh;
-    background-color: rgb(0, 36, 70);
+    height: 20vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,18 +74,39 @@ section {
 #div_bemVindo {
     width: 100%;
     height: 10vh;
+    font-size: 110%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #005957;
+    text-align: center;
+    background-color: rgb(0, 33, 52);
 }
-#div_links {
+#containerLinks {
+    width: 100%;
+    height: 57vh;
+}
+.div_links {
     width: 100%;
     height: 60vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    padding-top: 5%;
+    gap: 2%
+}
+.link {
+    width: 80%;
+    height: 7vh;
+    display: flex;
     justify-content: center;
-    background-color: #008068;
+    align-items: center;
+    border-radius: 7px;
+    font-weight: 600;
+    
+}
+.link:hover {
+    background-color: rgb(0, 45, 69);
+    cursor: pointer;
 }
 #div_sair {
     width: 100%;
@@ -94,25 +114,32 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #d82e2e;
+}
+.conteudo_sair {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 33, 52);
+}
+.conteudo_sair:hover {
+    background-color: rgb(0, 41, 63);
+    cursor: pointer;
 }
 .conteudo_jogo {
     width: 83%;
     height: 100vh;
-    /* background-color: #2ed86c; */
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 }
 .titulo_jogo {
     font-size: 230%;
     font-weight: 700;
-    /* background-color: black; */
     width: 90%;
     height: 15vh;
     z-index: 20;
-    /* padding-top: 5%; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,7 +182,7 @@ section {
     left: -10%;
 }
 .ponyo {
-    width: 7.5%;
+    width: 8%;
     position: absolute;
     bottom: 0;
     z-index: 3;
@@ -172,9 +199,10 @@ section {
 .obstaculo {
     position: absolute;
     bottom: 0;
-    width: 15%;
+    width: 18%;
+    height: 25%;
     z-index: 4;
-    animation: obstaculo-animation 2s infinite linear;
+    animation: obstaculo-animation 2.5s infinite linear;
     display: none;
 }
 #div_btIniciar {
@@ -246,11 +274,11 @@ section {
 }
 @keyframes obstaculo-animation {
     from {
-        right: -10%;
+        right: -20%;
         bottom: -13%;
     }
     to {
-        right: 100%;
+        right: 150%;
         bottom: 0;
     }
 }
