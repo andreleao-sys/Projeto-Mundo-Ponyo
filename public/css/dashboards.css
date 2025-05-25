@@ -44,14 +44,20 @@ section {
     color: whitesmoke;
     transition: 0.3s ease;
 }
-#jogo {
+#container {
     display: flex;
     /* justify-content: center; */
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-color: rgb(0, 30, 48);
+    background-color: rgb(210, 210, 210);
 }
+/* .conteudo_dashboard, 
+.conteudo_galeria, 
+.conteudo_jogo, 
+.conteudo_ranking {
+    display: none !important;
+} */
 .nav_lateral {
     width: 17%;
     height: 100vh;
@@ -59,7 +65,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    box-shadow: rgba(4, 9, 10, 0.319) 0px 2px 4px 0px, rgba(10, 22, 27, 0.32) 0px 2px 16px 0px;
 }
 .div_logoMundoPonyo {
     width: 100%;
@@ -73,17 +79,18 @@ section {
 }
 #div_bemVindo {
     width: 100%;
-    height: 10vh;
+    height: 7vh;
     font-size: 110%;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     text-align: center;
-    background-color: rgb(0, 33, 52);
+    /* background-color: rgb(0, 33, 52); */
+    padding-top: 3%;
 }
 #containerLinks {
     width: 100%;
-    height: 57vh;
+    height: 60vh;
 }
 .div_links {
     width: 100%;
@@ -92,20 +99,22 @@ section {
     flex-direction: column;
     align-items: center;
     padding-top: 5%;
-    gap: 2%
+    gap: 2%;
 }
 .link {
-    width: 80%;
-    height: 7vh;
+    width: 70%;
+    padding: 6% 6%;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     border-radius: 7px;
     font-weight: 600;
+    text-indent: 15px;
+    /* border-left: 30px solid whitesmoke; */
     
 }
 .link:hover {
-    background-color: rgb(0, 45, 69);
+    background-color: rgb(0, 41, 62);
     cursor: pointer;
 }
 #div_sair {
@@ -122,10 +131,136 @@ section {
     align-items: center;
     justify-content: center;
     background-color: rgb(0, 33, 52);
+    font-weight: 600;
 }
 .conteudo_sair:hover {
     background-color: rgb(0, 41, 63);
     cursor: pointer;
+}
+.conteudo_dashboard {
+    width: 83%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* display: none; */
+    color: #004d7a;
+}
+.corpo_dashboard {
+    width: 93%;
+    height: 81vh;
+    /* background-color:  rgb(0, 27, 46); */
+    display: flex;
+    flex-direction: column;
+}
+.div_kpis {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+.kpi {
+    width: 19%;
+    height: 100%;
+    background-color:whitesmoke;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.titulo_kpi {
+    width: 80%;
+    height: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100%;
+    font-weight: 650;
+    text-align: center;
+}
+.dado_kpi {
+    width: 100%;
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+    font-weight: 700;
+    margin-top: -4%;
+    color: #004d7a;
+}
+.container_grafico {
+    width: 100%;
+    height: 80%;
+    /* background-color: rgb(0, 36, 56); */
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+.div_graficoLinha {
+    width: 59.5%;
+    height: 97%;
+    background-color:whitesmoke;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.div_graficoPizza {
+    width: 39.3%;
+    height: 97%;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.titulo_grafico {
+    width: 94%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    font-size: 115%;
+    font-weight: 650;
+    margin-left: 4%;
+}
+.titulo_graficoPizza {
+    width: 80%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: end;
+    font-size: 115%;
+    font-weight: 650;
+    text-align: center;
+}
+.graficoLinha {
+    width: 100%;
+    height: 80%;
+    /* background-color: #d82e2e; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.graficoPizza {
+    width: 100%;
+    height: 80%;
+    /* background-color: #d82e2e; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.conteudo_galeria {
+    width: 83%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: none;
 }
 .conteudo_jogo {
     width: 83%;
@@ -133,16 +268,27 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    display: none;
 }
-.titulo_jogo {
+.conteudo_ranking {
+    width: 83%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+}
+.titulo_conteudo {
     font-size: 230%;
     font-weight: 700;
     width: 90%;
-    height: 15vh;
+    height: 13vh;
     z-index: 20;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #003e59;
+    /* background-color: #005957; */
     
 }
 .game_board {
@@ -156,6 +302,7 @@ section {
     z-index: 5;
     top: 10%;
     overflow: hidden;
+    border-radius: 8px;
 }
 #gradient-cenario-bottom {
     position: absolute;
@@ -199,7 +346,7 @@ section {
 .obstaculo {
     position: absolute;
     bottom: 0;
-    width: 18%;
+    width: 20%;
     height: 25%;
     z-index: 4;
     animation: obstaculo-animation 2.5s infinite linear;
@@ -245,6 +392,7 @@ section {
     align-items: center;
     flex-direction: column;
     position: fixed;
+    border-radius: 8px;
     z-index: 10;
     /* top: 17%; */
     display: none;
@@ -273,11 +421,15 @@ section {
     flex-direction: row;
 }
 @keyframes obstaculo-animation {
-    from {
+    0% {
         right: -20%;
         bottom: -13%;
     }
-    to {
+    50% {
+        right: 80%;
+        bottom: 0;
+    }
+    100% {
         right: 150%;
         bottom: 0;
     }

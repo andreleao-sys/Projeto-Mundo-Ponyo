@@ -10,9 +10,9 @@
     <link rel="stylesheet" type="text/css" href="../css/dashboards.css" media="screen" />
     <title>Mundo Ponyo</title>
 </head>
-<body>
+<body onload="atualizarPagina()">
     
-    <section id="jogo">
+    <section id="container">
         <div class="nav_lateral">
             <div class="div_logoMundoPonyo">
                 <img id="imgMundoPonyo" src="../assets/img/logo-mundo-ponyo.png" alt="Mundo Ponyo">
@@ -20,18 +20,85 @@
             <div id="div_bemVindo">Bem vindo de volta!</div>
             <div id="containerLinks">
                 <div class="div_links">
-                    <div class="link">Dashboard</div>
-                    <div class="link">Galeria</div>
-                    <div class="link">Jogo</div>
-                    <div class="link">Ranking</div>
+                    <div class="link" onclick="ativarDashboard()" id="link_dashboard">
+                        <img src="../assets/img/dashboard-icone.png" alt="Dashboard" style="width: 20px;">
+                        <div class="textLink">
+                            Dashboard
+                        </div>
+                    </div>
+                    <div class="link" onclick="ativarGaleria()" id="link_galeria">
+                        <img src="../assets/img/photo-gallery-icone.png" alt="Galeria" style="width: 20px;">
+                        <div class="textLink">
+                            Galeria
+                        </div>
+                    </div>
+                    <div class="link" onclick="ativarJogo()" id="link_jogo">
+                        <img src="../assets/img/jogo-icone.png" alt="Jogo" style="width: 20px;">
+                        <div class="textLink">
+                            Jogo
+                        </div>
+                    </div>
+                    <div class="link" onclick="ativarRanking()" id="link_ranking">
+                        <img src="../assets/img/trofeu-icone.png" alt="Ranking" style="width: 20px;">
+                        <div class="textLink">
+                            Ranking
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="div_sair">
-                <div class="conteudo_sair">SAIR</div>
+                <div class="conteudo_sair" onclick="sair()">SAIR</div>
             </div>
         </div>
+
+        <!-- CONTEÚDOS DA ÁREA DO USUÁRIO -->
+        <!-- Dashboard -->
+        <div class="conteudo_dashboard">
+            <div class="titulo_conteudo">Dashboard</div>
+            <div class="corpo_dashboard">
+                <div class="div_kpis">
+                    <div class="kpi">
+                        <div class="titulo_kpi">Recorde Atual</div>
+                        <div class="dado_kpi">10507 m</div>
+                    </div>
+                    <div class="kpi">
+                        <div class="titulo_kpi">Média de Pontuação por partida</div>
+                        <div class="dado_kpi">312 m</div>
+                    </div>
+                    <div class="kpi">
+                        <div class="titulo_kpi">Total de partidas Jogadas</div>
+                        <div class="dado_kpi">104</div>
+                    </div>
+                    <div class="kpi">
+                        <div class="titulo_kpi">Tempo de Jogo Acumulado</div>
+                        <div class="dado_kpi">950 min</div>
+                    </div>
+                    <div class="kpi">
+                        <div class="titulo_kpi">Personagem Favorito</div>
+                        <div class="dado_kpi">Ponyo</div>
+                    </div>
+                </div>
+                <div class="container_grafico">
+                    <div class="div_graficoLinha">
+                        <div class="titulo_grafico">Pontuação feita nas últimas partidas</div>
+                        <div class="graficoLinha"></div>
+                    </div>
+                    <div class="div_graficoPizza">
+                        <div class="titulo_graficoPizza">Quantidade de partidas jogadas com cada personagem</div>
+                        <div class="graficoPizza"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Galeria -->
+        <div class="conteudo_galeria">
+            <div class="titulo_conteudo">Galeria</div>
+        </div>
+
+        <!-- Jogo -->
         <div class="conteudo_jogo">
-            <div class="titulo_jogo">Ponyo Run</div>
+            <div class="titulo_conteudo">Ponyo Run</div>
 
             <div class="game_board">
                 <div id="gradient-cenario-top"></div>
@@ -66,12 +133,16 @@
                 </div>
             </div>
         </div>
+
+        <!-- Ranking -->
+        <div class="conteudo_ranking">
+            <div class="titulo_conteudo">Ranking</div>
+        </div>
     </section>
 </body>
 </html>
 <script>
     div_bemVindo.innerHTML = `Olá,&nbsp <b>${sessionStorage.NOME_USUARIO}</b>`;
-    sessionStorage.PARTIDAS = 0;
     
     //JOGO
     var pontuacao = 0;
@@ -109,13 +180,8 @@
             
             
             //Verifica a colisão
-            if (obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) {
+            if ((obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) || (obstaculoPosition < 0 && obstaculoPosition > -50 && ponyoPosition < 43)) {
                 recorde_usuario.innerHTML = `Recorde: ${pontuacao.toFixed()} m`
-
-                // if (recordeVar == null || recordeVar == undefined || recordeVar == 0 ) {
-                //     recorde_usuario.innerHTML = `Recorde: ${pontuacao.toFixed()} m`;
-                //     clearInterval(loop); //Para loop do jogo
-                // }
                 
                 gameOver.style.display = 'flex'; //Mostra a tela de game over
                 resultado_partida.innerHTML = `Score: ${pontuacao.toFixed()} m`;
@@ -135,7 +201,6 @@
 
                 cadastrarPartida().then(function() {
                     recordePonyoRun();
-                    // console.log('VAR RECORDE', recordeVar)
                 });
             } else {
                 indiceVelocidade = Number((indiceVelocidade + 0.035).toFixed(2));
@@ -199,9 +264,35 @@
     
     //Sair do jogo
     function stopGame() {
-        window.location.reload('');
+        gameOver.style.display = 'none'; //Esconde a tela de game over
+        start.style.display = 'flex'; //Mostra o botão de iniciar
+        
+        //Reseta a Ponyo
+        ponyo.classList.remove('jump'); //Remove o estado de pulo pendente
+        ponyo.src = '../assets/img/ponyo.gif'; //Volta o gif original
+        ponyo.style.width = '7.5%'; //Volta ao tamanho original
+        ponyo.style.marginLeft = '0'; //Remove a margin que foi adicionada no momento da colisão
+        ponyo.style.bottom = '0px'; //Reinicia a posição vertical
+        ponyo.style.animation = ''; //Remove animações travadas
+
+        //Reseta o obstáculo
+        obstaculo.style.display = 'none';
+        obstaculo.style.left = ''; 
+        obstaculo.style.animation = '';
+
+        //Reseta a pontuação
+        pontuacao = 0;
+        h1_pontuacao.innerHTML = '0 m';
+
+        indiceVelocidade = 0;
+        tempoDaOnda = 2.5;
+
+        //Removendo e readicionando o pulo pra certificar que funcione corretamente
+        document.removeEventListener('keydown', jump);
+        document.addEventListener('keydown', jump);
     }
 
+    //Função de pulo ao clicar em qualquer tela
     document.addEventListener('keydown', jump);
 
 
@@ -274,6 +365,90 @@
             console.log(erro);
         })
 
+    }
+
+    function sair() {
+        sessionStorage.clear();
+        window.location.href="../index.html"
+    }
+
+    function atualizarPagina() {
+        var abaAtual = sessionStorage.getItem('LOCAL_USER');
+
+        if (abaAtual === 'dashboardFlex') {
+            ativarDashboard();
+        } else if (abaAtual === 'galeriaFlex') {
+            ativarGaleria();
+        } else if (abaAtual === 'jogoFlex') {
+            ativarJogo();
+        } else if (abaAtual === 'rankingFlex') {
+            ativarRanking();
+        } else {
+            ativarDashboard();
+        }
+    }
+
+    function ativarDashboard() {
+        sessionStorage.setItem('LOCAL_USER', 'dashboardFlex');
+
+        if (sessionStorage.getItem('LOCAL_USER') === 'dashboardFlex' || sessionStorage.getItem('LOCAL_USER') == '') {
+            document.getElementsByClassName('conteudo_dashboard')[0].style.display = 'flex';
+            document.getElementsByClassName('conteudo_galeria')[0].style.display = 'none';
+            document.getElementsByClassName('conteudo_jogo')[0].style.display = 'none';
+            document.getElementsByClassName('conteudo_ranking')[0].style.display = 'none';
+            
+            document.getElementById('link_dashboard').style.backgroundColor = 'rgb(0, 45, 69)';
+            document.getElementById('link_galeria').style.backgroundColor = '';
+            document.getElementById('link_jogo').style.backgroundColor = '';
+            document.getElementById('link_ranking').style.backgroundColor = '';
+
+        } else if (sessionStorage.getItem('LOCAL_USER') === 'galeriaFlex') {
+            ativarGaleria();
+        } else if (sessionStorage.getItem('LOCAL_USER') === 'jogoFlex') {
+            ativarJogo();
+        } else if (sessionStorage.getItem('LOCAL_USER') === 'rankingFlex') {
+            ativarRanking();
+        }
+            
+    }
+    function ativarGaleria() {
+        document.getElementsByClassName('conteudo_dashboard')[0].style.display = 'none';
+        document.getElementsByClassName('conteudo_galeria')[0].style.display = 'flex';
+        document.getElementsByClassName('conteudo_jogo')[0].style.display = 'none';
+        document.getElementsByClassName('conteudo_ranking')[0].style.display = 'none';
+
+        document.getElementById('link_dashboard').style.backgroundColor = '';
+        document.getElementById('link_galeria').style.backgroundColor = 'rgb(0, 45, 69)';
+        document.getElementById('link_jogo').style.backgroundColor = '';
+        document.getElementById('link_ranking').style.backgroundColor = '';
+
+        sessionStorage.setItem('LOCAL_USER', 'galeriaFlex');
+    }
+    function ativarJogo() {
+        document.getElementsByClassName('conteudo_dashboard')[0].style.display = 'none';
+        document.getElementsByClassName('conteudo_galeria')[0].style.display = 'none';
+        document.getElementsByClassName('conteudo_jogo')[0].style.display = 'flex';
+        document.getElementsByClassName('conteudo_ranking')[0].style.display = 'none';
+
+        document.getElementById('link_dashboard').style.backgroundColor = '';
+        document.getElementById('link_galeria').style.backgroundColor = '';
+        document.getElementById('link_jogo').style.backgroundColor = 'rgb(0, 45, 69)';
+        document.getElementById('link_ranking').style.backgroundColor = '';
+        
+        sessionStorage.setItem('LOCAL_USER', 'jogoFlex');
+    }
+    function ativarRanking() {
+        document.getElementsByClassName('conteudo_dashboard')[0].style.display = 'none';
+        document.getElementsByClassName('conteudo_galeria')[0].style.display = 'none';
+        document.getElementsByClassName('conteudo_jogo')[0].style.display = 'none';
+        document.getElementsByClassName('conteudo_ranking')[0].style.display = 'flex';
+
+        document.getElementById('link_dashboard').style.backgroundColor = '';
+        document.getElementById('link_galeria').style.backgroundColor = '';
+        document.getElementById('link_jogo').style.backgroundColor = '';
+        document.getElementById('link_ranking').style.backgroundColor = 'rgb(0, 45, 69)';
+
+        sessionStorage.setItem('LOCAL_USER', 'rankingFlex');
     }
 
     
