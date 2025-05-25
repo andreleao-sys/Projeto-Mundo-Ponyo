@@ -57,7 +57,7 @@
                         <div id="resultado_partida"></div>
                     </div>
                     <div class="recorde">
-                        <div id="recorde_usuario">Recorde: 10500 m</div>
+                        <div id="recorde_usuario">Recorde:</div>
                     </div>
                     <div class="buttons_gameOver">
                         <button onclick="restartGame()" id="restart" class="bt_preenchido buttons btReiniciar">Reiniciar</button>
@@ -71,11 +71,13 @@
 </html>
 <script>
     div_bemVindo.innerHTML = `Olá,&nbsp <b>${sessionStorage.NOME_USUARIO}</b>`;
+    sessionStorage.PARTIDAS = 0;
     
     //JOGO
     var pontuacao = 0;
     var indiceVelocidade = 0;
     var tempoDaOnda = 2.5;
+    var recordeVar;
 
     //Selecionando elementos HTML
     const ponyo = document.querySelector('.ponyo');
@@ -103,13 +105,21 @@
             const ponyoPosition = Number(window.getComputedStyle(ponyo).bottom.replace('px', '')); //Posição vertical da Ponyo
             
             console.log('onda:' + obstaculoPosition);
-
+            
+            
+            
             //Verifica a colisão
             if (obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) {
+                recorde_usuario.innerHTML = `Recorde: ${pontuacao.toFixed()} m`
 
+                // if (recordeVar == null || recordeVar == undefined || recordeVar == 0 ) {
+                //     recorde_usuario.innerHTML = `Recorde: ${pontuacao.toFixed()} m`;
+                //     clearInterval(loop); //Para loop do jogo
+                // }
+                
                 gameOver.style.display = 'flex'; //Mostra a tela de game over
                 resultado_partida.innerHTML = `Score: ${pontuacao.toFixed()} m`;
-
+                
                 //Congela o obstáculo e a Ponyo na posição da colisão
                 obstaculo.style.animation = 'none';
                 obstaculo.style.left = `${obstaculoPosition}px`;
@@ -123,7 +133,10 @@
                 
                 clearInterval(loop); //Para loop do jogo
 
-                cadastrarPartida();
+                cadastrarPartida().then(function() {
+                    recordePonyoRun();
+                    // console.log('VAR RECORDE', recordeVar)
+                });
             } else {
                 indiceVelocidade = Number((indiceVelocidade + 0.035).toFixed(2));
                 console.log('i: ' + indiceVelocidade);
@@ -148,7 +161,6 @@
                 pontuacao = pontuacao + 0.035; //Incrementa a pontuacão
                 h1_pontuacao.innerHTML = `${pontuacao.toFixed()} m`; //Atualiza ao placar
 
-                recordePonyoRun();
             }
         }, 10); // 10 miilisegundos = 0.01 segundo
     }
@@ -199,7 +211,9 @@
         var pontuacaoVar = Number(pontuacao.toFixed());
         console.log(fkUsuario, pontuacaoVar)
 
-        fetch("/dashboard/cadastrarPartida", {
+        //O return é necessário nesse fetch para que seja possível utilizar o 
+        //.then quando o jogador perde, algo necessário para chamar a função de recorde
+        return fetch("/dashboard/cadastrarPartida", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -228,8 +242,7 @@
     //Trazendo Recorde
     function recordePonyoRun() {
         var fkUsuario = sessionStorage.getItem("ID_USUARIO");
-        var recordeVar = pontuacao;
-
+        
         fetch(`/dashboard/buscarRecorde?fkUsuario=${fkUsuario}`, {
             method: "GET",
             headers: {
@@ -244,7 +257,9 @@
                     console.log('Dados recebidos', json);
                     console.log('Recorde:', json.recorde);
                     document.getElementById('recorde_usuario').innerHTML = `Recorde: ${json.recorde} m`;
-    
+                    
+                    recordeVar = json.recorde;
+                    console.log('ÓIA',recordeVar)
                 });
 
             } else {
