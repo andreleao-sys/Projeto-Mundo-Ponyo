@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="./js/sessao.js"></script>
+    <!-- <script src="./js/sessao.js"></script> -->
     
     <link rel="shortcut icon" type="imagex/png" href="../assets/img/ponyo-icone.png">
     <link rel="stylesheet" type="text/css" href="../css/dashboards.css" media="screen" />
@@ -147,6 +147,8 @@
                 }
                 pontuacao = pontuacao + 0.035; //Incrementa a pontuacão
                 h1_pontuacao.innerHTML = `${pontuacao.toFixed()} m`; //Atualiza ao placar
+
+                recordePonyoRun();
             }
         }, 10); // 10 miilisegundos = 0.01 segundo
     }
@@ -223,7 +225,41 @@
             return false;
     }
 
+    //Trazendo Recorde
+    function recordePonyoRun() {
+        var fkUsuario = sessionStorage.getItem("ID_USUARIO");
+        var recordeVar = pontuacao;
 
+        fetch(`/dashboard/buscarRecorde?fkUsuario=${fkUsuario}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO recordePonyoRun()!")
+            console.log(resposta);
+
+            if (resposta.ok) {
+                resposta.json().then(json => {
+                    console.log('Dados recebidos', json);
+                    console.log('Recorde:', json.recorde);
+                    document.getElementById('recorde_usuario').innerHTML = `Recorde: ${json.recorde} m`;
+    
+                });
+
+            } else {
+                console.log("Houve um erro ao tentar buscar o recorde!");
+                
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+    }
 
     
 </script>
