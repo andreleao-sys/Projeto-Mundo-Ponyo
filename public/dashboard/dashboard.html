@@ -23,7 +23,7 @@
                     <div class="link" onclick="ativarDashboard()" id="link_dashboard">
                         <img src="../assets/img/dashboard-icone.png" alt="Dashboard" style="width: 20px;">
                         <div class="textLink">
-                            Dashboard
+                            Meu Painel
                         </div>
                     </div>
                     <div class="link" onclick="ativarGaleria()" id="link_galeria">
@@ -54,12 +54,12 @@
         <!-- CONTEÚDOS DA ÁREA DO USUÁRIO -->
         <!-- Dashboard -->
         <div class="conteudo_dashboard">
-            <div class="titulo_conteudo">Dashboard</div>
+            <div class="titulo_conteudo">Meu Painel</div>
             <div class="corpo_dashboard">
                 <div class="div_kpis">
                     <div class="kpi">
                         <div class="titulo_kpi">Recorde Atual</div>
-                        <div class="dado_kpi">10507 m</div>
+                        <div class="dado_kpi" id="kpi_recorde">10507 m</div>
                     </div>
                     <div class="kpi">
                         <div class="titulo_kpi">Média de Pontuação por partida</div>
@@ -93,7 +93,94 @@
 
         <!-- Galeria -->
         <div class="conteudo_galeria">
-            <div class="titulo_conteudo">Galeria</div>
+            <div class="titulo_padrao">Galeria</div>
+            <div class="div_select">
+                <select name="slcGaleria" id="slcGaleria" onchange="filtrarGaleria()">
+                    <option value="tudo">Mostrar Tudo</option>
+                    <option value="fotos">Fotos - Animação</option>
+                    <option value="arts">Arts of Ponyo - Hayao Miyazaki</option>
+                </select>
+            </div>
+            <div class="div_fotos">
+                <div class="linha_fotos">
+                    <a href="../assets/img/ponyo001.jpg"><img src="../assets/img/ponyo001.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo002.jpg"><img src="../assets/img/ponyo002.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo003.jpg"><img src="../assets/img/ponyo003.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/ponyo004.jpg"><img src="../assets/img/ponyo004.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo005.jpg"><img src="../assets/img/ponyo005.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo006.jpg"><img src="../assets/img/ponyo006.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/ponyo007.jpg"><img src="../assets/img/ponyo007.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo008.jpg"><img src="../assets/img/ponyo008.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo009.jpg"><img src="../assets/img/ponyo009.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/ponyo010.jpg"><img src="../assets/img/ponyo010.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo011.jpg"><img src="../assets/img/ponyo011.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo012.jpg"><img src="../assets/img/ponyo012.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/ponyo013.jpg"><img src="../assets/img/ponyo013.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo014.jpg"><img src="../assets/img/ponyo014.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo015.jpg"><img src="../assets/img/ponyo015.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/ponyo016.jpg"><img src="../assets/img/ponyo016.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo017.jpg"><img src="../assets/img/ponyo017.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo018.jpg"><img src="../assets/img/ponyo018.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/ponyo019.jpg"><img src="../assets/img/ponyo019.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo020.jpg"><img src="../assets/img/ponyo020.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo021.jpg"><img src="../assets/img/ponyo021.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/ponyo022.jpg"><img src="../assets/img/ponyo022.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo023.jpg"><img src="../assets/img/ponyo023.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo024.jpg"><img src="../assets/img/ponyo024.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/ponyo025.jpg"><img src="../assets/img/ponyo025.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo026.jpg"><img src="../assets/img/ponyo026.jpg" alt=""></a>
+                    <a href="../assets/img/ponyo027.jpg"><img src="../assets/img/ponyo027.jpg" alt=""></a>
+                </div>
+            </div>
+
+            <div class="div_arts">
+                <div class="linha_fotos">
+                    <a href="../assets/img/art1.jpg"><img src="../assets/img/art1.jpg" alt=""></a>
+                    <a href="../assets/img/art2.jpg"><img src="../assets/img/art2.jpg" alt=""></a>
+                    <a href="../assets/img/art3.jpg"><img src="../assets/img/art3.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/art4.jpg"><img src="../assets/img/art4.jpg" alt=""></a>
+                    <a href="../assets/img/art5.jpg"><img src="../assets/img/art5.jpg" alt=""></a>
+                    <a href="../assets/img/art6.jpg"><img src="../assets/img/art6.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/art7.jpg"><img src="../assets/img/art7.jpg" alt=""></a>
+                    <a href="../assets/img/art8.jpg"><img src="../assets/img/art8.jpg" alt=""></a>
+                    <a href="../assets/img/art9.jpg"><img src="../assets/img/art9.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/art10.jpg"><img src="../assets/img/art10.jpg" alt=""></a>
+                    <a href="../assets/img/art11.jpg"><img src="../assets/img/art11.jpg" alt=""></a>
+                    <a href="../assets/img/art12.jpg"><img src="../assets/img/art12.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/art13.jpg"><img src="../assets/img/art13.jpg" alt=""></a>
+                    <a href="../assets/img/art14.jpg"><img src="../assets/img/art14.jpg" alt=""></a>
+                    <a href="../assets/img/art15.jpg"><img src="../assets/img/art15.jpg" alt=""></a>
+                </div>
+                <div class="linha_fotos">
+                    <a href="../assets/img/art16.jpg"><img src="../assets/img/art16.jpg" alt=""></a>
+                    <a href="../assets/img/art17.jpg"><img src="../assets/img/art17.jpg" alt=""></a>
+                    <a href="../assets/img/art18.jpg"><img src="../assets/img/art18.jpg" alt=""></a>
+                </div>
+            </div>
         </div>
 
         <!-- Jogo -->
@@ -348,6 +435,7 @@
                     console.log('Dados recebidos', json);
                     console.log('Recorde:', json.recorde);
                     document.getElementById('recorde_usuario').innerHTML = `Recorde: ${json.recorde} m`;
+                    document.getElementById('kpi_recorde').innerHTML = `${json.recorde} m`;
                     
                     recordeVar = json.recorde;
                     console.log('ÓIA',recordeVar)
@@ -451,5 +539,18 @@
         sessionStorage.setItem('LOCAL_USER', 'rankingFlex');
     }
 
-    
+    //FILTRO - GALERIA
+    function filtrarGaleria() {
+        if (slcGaleria.value == 'tudo') {
+            document.getElementsByClassName('div_fotos')[0].style.display = 'block';
+            document.getElementsByClassName('div_arts')[0].style.display = 'block';
+        } else if (slcGaleria.value == 'fotos') {
+            document.getElementsByClassName('div_fotos')[0].style.display = 'block';
+            document.getElementsByClassName('div_arts')[0].style.display = 'none';
+        } else if (slcGaleria.value == 'arts') {
+            document.getElementsByClassName('div_fotos')[0].style.display = 'none';
+            document.getElementsByClassName('div_arts')[0].style.display = 'block';
+        } 
+    }
+
 </script>

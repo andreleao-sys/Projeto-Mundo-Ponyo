@@ -12,6 +12,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    height: 100%;
     overflow-x: hidden; 
     color: whitesmoke;
     font-family:'Montserrat', sans-serif;
@@ -65,7 +66,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: rgba(4, 9, 10, 0.319) 0px 2px 4px 0px, rgba(10, 22, 27, 0.32) 0px 2px 16px 0px;
+    box-shadow: rgba(0, 0, 0, 0.653) 0px 5px 15px;
 }
 .div_logoMundoPonyo {
     width: 100%;
@@ -260,8 +261,79 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
     display: none;
 }
+.titulo_padrao {
+    font-size: 230%;
+    font-weight: 700;
+    width: 90%;
+    /* height: 13%; */
+    padding: 2% 0% 1.7% 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #003e59;
+}
+.div_select {
+    width: 93%;
+    display: flex;
+    justify-content: start;
+}
+#slcGaleria {
+    width: 100%;
+    padding: 0.5% 0.5%;
+    margin-bottom: 1%;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    /* text-align: center; */
+    background-color: rgba(245, 245, 245, 0.702);
+    color: #005d7a;
+    border: none;
+    border-radius: 5px;
+}
+#slcGaleria option {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    background-color:  rgb(228, 228, 228);
+    color: #636363;
+}
+#slcGaleria:focus {
+    outline: 2px solid #bbbaba;
+}
+.div_fotos {
+    width: 93%;
+    /* height: 10rem; */
+    gap: 1%;
+    /* background-color: #003e59; */
+    margin-bottom: 1%;
+    /* margin-top: 1%; */
+}
+.linha_fotos {
+    width: 100%;
+    height: 40vh;
+    border-radius: 15px;
+    /* background-color: aqua; */
+    margin-bottom: 1%;
+    display: flex;
+    justify-content: space-between;
+}
+.linha_fotos a {
+    width: 32.5%;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.linha_fotos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.div_arts {
+    width: 93%;
+    gap: 1%;
+    margin-bottom: 1%;
+}
+
 .conteudo_jogo {
     width: 83%;
     height: 100vh;

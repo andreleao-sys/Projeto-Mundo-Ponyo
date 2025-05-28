@@ -98,6 +98,7 @@ section {
     height: 3px;
     background-color: whitesmoke;
     transition: width 0.3s ease;
+    border-radius: 5px;
 }
 #nav_links li a:hover::after,
 #nav-links li a:focus::after {
@@ -192,9 +193,10 @@ section {
     border-radius: 50px;
     padding: 2% 4%;
     font-size: 150%;
-    /* background-color: rgba(0, 34, 75, 0.127); */
+    box-shadow: rgba(0, 46, 77, 0.135) 0px -50px 36px -28px inset;
 }
-#btMegulhar:hover {
+#btMergulhar:hover {
+    box-shadow: none;
     background-color: #d82e2e;
     border-color: #d82e2e;
     color: whitesmoke;
