@@ -19,7 +19,6 @@ function cadastrarPartida(req, res) {
         }
     )
 }
-
 function buscarRecorde(req, res) {
 
     var fkUsuario = req.query.fkUsuario;
@@ -48,7 +47,66 @@ function buscarRecorde(req, res) {
 
 }
 
+function buscarMediaPontuacao(req, res) {
+
+    var fkUsuario = req.params.fkUsuario;
+
+    if (!fkUsuario) {
+        res.status(400).send("A média está undefined!");
+    } else {
+
+        dashboardModel.buscarMediaPontuacao(fkUsuario)
+            .then(function (resultadoBuscar) {
+                console.log(`\nResultados encontrados: ${resultadoBuscar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoBuscar)}`); // transforma JSON em String
+                console.log(resultadoBuscar);
+
+                var media = resultadoBuscar[0].mediaPontuacao;
+                res.json({ media });
+                    
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar busca da média! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
+function buscarTotalPartidas(req, res) {
+
+    var fkUsuario = req.params.fkUsuario;
+
+    if (!fkUsuario) {
+        res.status(400).send("O total de partidas está undefined!");
+    } else {
+
+        dashboardModel.buscarTotalPartidas(fkUsuario)
+            .then(function (resultadoBuscar) {
+                console.log(`\nResultados encontrados: ${resultadoBuscar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoBuscar)}`); // transforma JSON em String
+                console.log(resultadoBuscar);
+
+                var total = resultadoBuscar[0].totalPartidas;
+                res.json({ total });
+                console.log('COUNT: ' + total);
+                    
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar busca da média! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
 module.exports = {
     cadastrarPartida,
     buscarRecorde,
+    buscarMediaPontuacao,
+    buscarTotalPartidas,
 }

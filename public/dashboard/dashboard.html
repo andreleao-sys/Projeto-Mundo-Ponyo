@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- <script src="./js/sessao.js"></script> -->
-    
+
     <link rel="shortcut icon" type="imagex/png" href="../assets/img/ponyo-icone.png">
     <link rel="stylesheet" type="text/css" href="../css/dashboards.css" media="screen" />
     <title>Mundo Ponyo</title>
 </head>
+
 <body onload="atualizarPagina()">
-    
+
     <section id="container">
         <div class="nav_lateral">
             <div class="div_logoMundoPonyo">
@@ -59,23 +61,23 @@
                 <div class="div_kpis">
                     <div class="kpi">
                         <div class="titulo_kpi">Recorde Atual</div>
-                        <div class="dado_kpi" id="kpi_recorde">10507 m</div>
+                        <div class="dado_kpi" id="kpi_recorde">0 m</div>
                     </div>
                     <div class="kpi">
                         <div class="titulo_kpi">Média de Pontuação por partida</div>
-                        <div class="dado_kpi">312 m</div>
+                        <div class="dado_kpi" id="kpi_mediaPontuacao">0 m</div>
                     </div>
                     <div class="kpi">
                         <div class="titulo_kpi">Total de partidas Jogadas</div>
-                        <div class="dado_kpi">104</div>
+                        <div class="dado_kpi" id="kpi_totalPartidas">0</div>
                     </div>
                     <div class="kpi">
                         <div class="titulo_kpi">Tempo de Jogo Acumulado</div>
-                        <div class="dado_kpi">950 min</div>
+                        <div class="dado_kpi">0 min</div>
                     </div>
                     <div class="kpi">
                         <div class="titulo_kpi">Personagem Favorito</div>
-                        <div class="dado_kpi">Ponyo</div>
+                        <div class="dado_kpi">――――</div>
                     </div>
                 </div>
                 <div class="container_grafico">
@@ -214,7 +216,8 @@
                         <div id="recorde_usuario">Recorde:</div>
                     </div>
                     <div class="buttons_gameOver">
-                        <button onclick="restartGame()" id="restart" class="bt_preenchido buttons btReiniciar">Reiniciar</button>
+                        <button onclick="restartGame()" id="restart"
+                            class="bt_preenchido buttons btReiniciar">Reiniciar</button>
                         <button onclick="stopGame()" id="stop" class="bt_preenchido buttons btReiniciar">Parar</button>
                     </div>
                 </div>
@@ -227,10 +230,11 @@
         </div>
     </section>
 </body>
+
 </html>
 <script>
     div_bemVindo.innerHTML = `Olá,&nbsp <b>${sessionStorage.NOME_USUARIO}</b>`;
-    
+
     //JOGO
     var pontuacao = 0;
     var indiceVelocidade = 0;
@@ -256,38 +260,40 @@
         gameOver.style.display = 'none'; //Esconde a tela de game over
         obstaculo.style.display = 'flex'; //Deixa os obstáculos visíveis
         start.style.display = 'none'; //Esconde o botão de iniciar
-        
+
         const loop = setInterval(() => {
 
             const obstaculoPosition = obstaculo.offsetLeft; //Pega a posição horizontal do obstáculo
             const ponyoPosition = Number(window.getComputedStyle(ponyo).bottom.replace('px', '')); //Posição vertical da Ponyo
-            
+
             console.log('onda:' + obstaculoPosition);
-            
-            
-            
+
+
+
             //Verifica a colisão
             if ((obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) || (obstaculoPosition < 0 && obstaculoPosition > -50 && ponyoPosition < 43)) {
                 recorde_usuario.innerHTML = `Recorde: ${pontuacao.toFixed()} m`
-                
+
                 gameOver.style.display = 'flex'; //Mostra a tela de game over
                 resultado_partida.innerHTML = `Score: ${pontuacao.toFixed()} m`;
-                
+
                 //Congela o obstáculo e a Ponyo na posição da colisão
                 obstaculo.style.animation = 'none';
                 obstaculo.style.left = `${obstaculoPosition}px`;
                 ponyo.style.animation = 'none';
                 ponyo.style.bottom = `${ponyoPosition}px`;
-                
+
                 //Altera a imagem da Ponyo para game over
                 ponyo.src = '../assets/img/ponyo-game-over.png';
                 ponyo.style.width = '80px';
                 ponyo.style.marginLeft = '30px';
-                
+
                 clearInterval(loop); //Para loop do jogo
 
-                cadastrarPartida().then(function() {
+                cadastrarPartida().then(function () {
                     recordePonyoRun();
+                    mediaPontuacaoPonyoRun(fkUsuario);
+                    totalPartidasJogadas(fkUsuario);
                 });
             } else {
                 indiceVelocidade = Number((indiceVelocidade + 0.035).toFixed(2));
@@ -306,7 +312,7 @@
                     // // 1. Pausa a animação e congela a posição atual
                     obstaculo.style.animation = 'none';
                     void obstaculo.offsetWidth; // Truque mágico (força a pausa)
-                    
+
                     obstaculo.style.animation = `obstaculo-animation ${tempoDaOnda}s infinite linear`;
                     indiceVelocidade = 0;
                 }
@@ -320,7 +326,7 @@
     //Função de reiniciar
     const restartGame = () => {
         gameOver.style.display = 'none'; //Esconde a tela de game over
-        
+
         //Reseta a Ponyo
         ponyo.classList.remove('jump'); //Remove o estado de pulo pendente
         ponyo.src = '../assets/img/ponyo.gif'; //Volta o gif original
@@ -348,12 +354,12 @@
 
         startGame();
     }
-    
+
     //Sair do jogo
     function stopGame() {
         gameOver.style.display = 'none'; //Esconde a tela de game over
         start.style.display = 'flex'; //Mostra o botão de iniciar
-        
+
         //Reseta a Ponyo
         ponyo.classList.remove('jump'); //Remove o estado de pulo pendente
         ponyo.src = '../assets/img/ponyo.gif'; //Volta o gif original
@@ -364,7 +370,7 @@
 
         //Reseta o obstáculo
         obstaculo.style.display = 'none';
-        obstaculo.style.left = ''; 
+        obstaculo.style.left = '';
         obstaculo.style.animation = '';
 
         //Reseta a pontuação
@@ -394,7 +400,7 @@
         return fetch("/dashboard/cadastrarPartida", {
             method: "POST",
             headers: {
-            "Content-Type": "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 fkUsuarioServer: fkUsuario,
@@ -414,13 +420,48 @@
                 console.log(`#ERRO: ${resposta}`);
             });
 
-            return false;
+        return false;
     }
 
-    //Trazendo Recorde
+    //Trazendo KPI - Recorde Atual
+    var fkUsuario = sessionStorage.getItem("ID_USUARIO");
+
+    fetch(`/dashboard/buscarRecorde?fkUsuario=${fkUsuario}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO recordePonyoRun()!")
+        console.log(resposta);
+
+        if (resposta.ok) {
+            resposta.json().then(json => {
+                console.log('Dados recebidos', json);
+                console.log('Recorde:', json.recorde);
+                document.getElementById('recorde_usuario').innerHTML = `Recorde: ${json.recorde} m`;
+                document.getElementById('kpi_recorde').innerHTML = `${json.recorde} m`;
+
+                recordeVar = json.recorde;
+                console.log('ÓIA', recordeVar)
+            });
+
+        } else {
+            console.log("Houve um erro ao tentar buscar o recorde!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+    //Trazendo Recorde no Game Over
     function recordePonyoRun() {
         var fkUsuario = sessionStorage.getItem("ID_USUARIO");
-        
+
         fetch(`/dashboard/buscarRecorde?fkUsuario=${fkUsuario}`, {
             method: "GET",
             headers: {
@@ -436,14 +477,13 @@
                     console.log('Recorde:', json.recorde);
                     document.getElementById('recorde_usuario').innerHTML = `Recorde: ${json.recorde} m`;
                     document.getElementById('kpi_recorde').innerHTML = `${json.recorde} m`;
-                    
+
                     recordeVar = json.recorde;
-                    console.log('ÓIA',recordeVar)
                 });
 
             } else {
                 console.log("Houve um erro ao tentar buscar o recorde!");
-                
+
                 resposta.text().then(texto => {
                     console.error(texto);
                 });
@@ -455,9 +495,69 @@
 
     }
 
+    //Trazendo KPI - Média de pontuação
+    var fkUsuario = sessionStorage.getItem("ID_USUARIO");
+    function mediaPontuacaoPonyoRun(fkUsuario) {
+        fetch(`/dashboard/buscarMediaPontuacao/${fkUsuario}`, { cache: 'no-store' })
+            .then(function (resposta) {
+                console.log("ESTOU NO THEN DO mediaPontuacaoPonyoRun()!")
+                console.log(resposta);
+
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        console.log('Dados recebidos', json);
+                        console.log('Média de Pontuação:', json.media);
+                        document.getElementById('kpi_mediaPontuacao').innerHTML = `${json.media} m`;
+
+                    });
+
+                } else {
+                    console.log("Houve um erro ao tentar buscar o média!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+    }
+    window.addEventListener('load', mediaPontuacaoPonyoRun(fkUsuario))
+
+    //Trazendo KPI - Total de partidas jogadas
+    var fkUsuario = sessionStorage.getItem("ID_USUARIO");
+    function totalPartidasPonyoRun(fkUsuario) {
+        fetch(`/dashboard/buscarTotalPartidas/${fkUsuario}`, { cache: 'no-store' })
+            .then(function (resposta) {
+                console.log("ESTOU NO THEN DO totalPartidasPonyoRun()!")
+                console.log(resposta);
+
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        console.log('Dados recebidos', json);
+                        console.log('Total Partidas:', json.total);
+                        document.getElementById('kpi_totalPartidas').innerHTML = `${json.total}`;
+
+                    });
+
+                } else {
+                    console.log("Houve um erro ao tentar buscar o total de partidas!");
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+    }
+    window.addEventListener('load', totalPartidasPonyoRun(fkUsuario))
+
+
     function sair() {
         sessionStorage.clear();
-        window.location.href="../index.html"
+        window.location.href = "../index.html"
     }
 
     function atualizarPagina() {
@@ -484,7 +584,7 @@
             document.getElementsByClassName('conteudo_galeria')[0].style.display = 'none';
             document.getElementsByClassName('conteudo_jogo')[0].style.display = 'none';
             document.getElementsByClassName('conteudo_ranking')[0].style.display = 'none';
-            
+
             document.getElementById('link_dashboard').style.backgroundColor = 'rgb(0, 45, 69)';
             document.getElementById('link_galeria').style.backgroundColor = '';
             document.getElementById('link_jogo').style.backgroundColor = '';
@@ -497,7 +597,7 @@
         } else if (sessionStorage.getItem('LOCAL_USER') === 'rankingFlex') {
             ativarRanking();
         }
-            
+
     }
     function ativarGaleria() {
         document.getElementsByClassName('conteudo_dashboard')[0].style.display = 'none';
@@ -522,7 +622,7 @@
         document.getElementById('link_galeria').style.backgroundColor = '';
         document.getElementById('link_jogo').style.backgroundColor = 'rgb(0, 45, 69)';
         document.getElementById('link_ranking').style.backgroundColor = '';
-        
+
         sessionStorage.setItem('LOCAL_USER', 'jogoFlex');
     }
     function ativarRanking() {
@@ -550,7 +650,7 @@
         } else if (slcGaleria.value == 'arts') {
             document.getElementsByClassName('div_fotos')[0].style.display = 'none';
             document.getElementsByClassName('div_arts')[0].style.display = 'block';
-        } 
+        }
     }
 
 </script>
