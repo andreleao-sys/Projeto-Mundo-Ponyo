@@ -15,5 +15,10 @@ router.get("/buscarMediaPontuacao/:fkUsuario", function (req, res) {
 router.get("/buscarTotalPartidas/:fkUsuario", function (req, res) {
     dashboardController.buscarTotalPartidas(req, res);
 });
-
+router.get("/ultimas/:fkUsuario", function (req, res) {
+    dashboardController.buscarUltimasPartidas(req, res);
+});
+router.get("/tempo-real/:fkUsuario", function (req, res) {
+    dashboardController.buscarPartidasEmTempoReal(req, res);
+})
 module.exports = router;

@@ -1,3 +1,4 @@
+// const { buscarUltimasPartidas, buscarPartidasEmTempoReal } = require("../controllers/dashboardController");
 var database = require("../database/config")
 
 function cadastrarPartida(fkUsuario, pontuacao) {
@@ -37,9 +38,35 @@ function buscarTotalPartidas(fkUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarUltimasPartidas(fkUsuario, limite_linhas) {
+
+    var instrucaoSql = `SELECT pontuacao,
+        DATE_FORMAT(dtPartida,'%d-%m %H:%i') as dtPartida_grafico
+                    FROM partida
+                    WHERE fkUsuario = ${fkUsuario}
+                    ORDER BY dtPartida DESC LIMIT ${limite_linhas}`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarPartidasEmTempoReal(fkUsuario) {
+
+    var instrucaoSql = `SELECT pontuacao,
+        DATE_FORMAT(dtPartida,'%d-%m-%Y %H:%i:%s') as dtPartida_grafico
+                    FROM partida
+                    WHERE fkUsuario = ${fkUsuario}
+                    ORDER BY dtPartida DESC LIMIT ${limite_linhas}`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     cadastrarPartida,
     buscarRecorde,
     buscarMediaPontuacao,
     buscarTotalPartidas,
+    buscarUltimasPartidas,
+    buscarPartidasEmTempoReal,
 };

@@ -268,7 +268,7 @@
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 
-                    obterdados(idAquario);
+                    obterDadosGrafico(idAquario);
                     // alertar(novoRegistro, idAquario);
                     console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
                     console.log(`Dados atuais do gráfico:`);
