@@ -209,8 +209,65 @@ section {
     backdrop-filter: blur(8px);
 }
 #sobre_filme {
+    width: 100%;
+    height: 100vh;
     scroll-margin-top: 0rem;
     background-color: rgb(25, 103, 131);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div_cartaz {
+    width: 23%;
+    height: 68vh;
+    background-color: #d82e2e;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+.div_cartaz img {
+    width: 100%;
+    /* filter: contrast(1) saturate(1.5); */
+}
+.div_conteudoFilme {
+    width: 65%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: black; */
+    margin-left: 2%;
+    text-align: justify;
+}
+.div_txt1Filme {
+    width: 100%;
+    /* background-color: aqua; */
+    height: 70vh;
+    margin-left: 2%;
+}
+.txt1Filme {
+    width: 100%;
+    /* background-color: aqua; */
+    margin-bottom: 2%;
+}
+.div_txt2Filme {
+    width: 48%;
+}
+.div_txt2FilmeComVideo {
+    width: 100%;
+    height: 80%;
+    /* background-color: #d82e2e; */
+    display: flex;
+    justify-content: space-between;
+}
+.div_video1Sobre {
+    width: 50%;
+    height: 98%;
+}
+.video1Sobre {
+    width: 100%;
+    object-fit: cover;
 }
 #galeria {
     background-color: rgb(21, 87, 111);

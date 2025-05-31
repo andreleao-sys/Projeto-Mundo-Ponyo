@@ -29,13 +29,15 @@
                     <button onclick="entrar()">Entrar</button>
                 </div>
             </div>
+            
+            <div class="alerta_erro">
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
+            </div>
+            
             <div id="div_fazerCadastro">
                 Não tem conta? <a href="cadastro.html">Faça seu cadastro!</a>
-            </div>
-
-            <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
             </div>
         </div>
     </div>
@@ -49,13 +51,14 @@
         var senhaVar = iptSenha.value;
 
         if (emailVar == "" || senhaVar == "") {
+            div_login.style.height = '65vh';
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            mensagem_erro.innerHTML = "Ops! Campo vazio, por favor preencha todos os campos em branco";
             //finalizarAguardar();
             return false;
         }
         else {
-            setInterval(sumirMensagem, 5000)
+            // setInterval(sumirMensagem, 5000)
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -91,6 +94,9 @@
                 });
 
             } else {
+                div_login.style.height = '65vh';
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Erro ao realizar login verifique se os dados estão corretos!";
 
                 console.log("Houve um erro ao tentar realizar o login!");
 

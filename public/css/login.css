@@ -21,9 +21,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url('../assets/img/ponyo041.jpg');
+    background-size: cover;
 }
 #div_login {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.841);
     width: 30%;
     height: 60vh;
     border-radius: 13px;
@@ -103,12 +105,23 @@ button:hover {
 #div_fazerCadastro {
     color: rgb(39, 43, 52);
     font-size: 100%;
-    padding-top: 5%;
+    padding-top: 2%;
+    padding-bottom: 1%;
 }
 #div_fazerCadastro a {
     color: #004585;
 }
-/* .alerta_erro {
-    color: whitesmoke;
-    font-style: italic;
-} */
+.alerta_erro {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card_erro {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 3%;
+}

@@ -18,7 +18,7 @@
 #div_cadastro {
     background-color: white;
     width: 35%;
-    height: 85vh;
+    height: 87vh;
     border-radius: 13px;
     display: flex;
     flex-direction: column;
@@ -41,6 +41,16 @@
     flex-direction: column;
     width: 100%;
 } */
+#div_senhaForte {
+    width: 96%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 80%;
+    margin-top: -2%;
+    margin-bottom: 0;
+    padding: 0;
+}
 #div_confirmarSenha {
     display: flex;
     flex-direction: column;
