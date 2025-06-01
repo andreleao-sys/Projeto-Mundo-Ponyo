@@ -18,8 +18,8 @@
 
 #div_cadastro {
     background-color:rgba(255, 255, 255, 0.841);
-    width: 35%;
-    height: 87vh;
+    width: 36%;
+    height: 90vh;
     border-radius: 13px;
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@
     align-items: center;
 }
 #corpo_cadastro {
-    width: 75%;
+    width: 81.5%;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -47,10 +47,11 @@
     display: none;
     justify-content: center;
     align-items: center;
-    font-size: 80%;
+    font-size: 76%;
     margin-top: -2%;
     margin-bottom: 0;
     padding: 0;
+    font-weight: 600;
 }
 #div_confirmarSenha {
     display: flex;

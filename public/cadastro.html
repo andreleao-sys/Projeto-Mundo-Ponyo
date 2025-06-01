@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/cadastro.css" media="screen" />
     <title>Mundo Ponyo | Cadastro</title>
 </head>
+
 <body>
     <div id="container">
 
@@ -29,9 +31,11 @@
                 </div>
                 <div id="div_senha">
                     <label>Senha:</label>
-                    <input type="password" id="iptSenha" placeholder="********" oninput="testarSenhaForte()">
+                    <input type="password" id="iptSenha" placeholder="********" onkeyup="testarSenhaForte()">
                 </div>
-                <div id="div_senhaForte">Senha Fraca: Letras | Números | Caracteres Especiais</div>
+                <div id="div_senhaForte"><span id="statusSenha">Senha Fraca.</span> <br> <span id="min8">Mínimo 8
+                        Caracteres |</span><span id="minLetras"> Letras |</span><span id="minNumeros"> Números |
+                    </span><span id="minEspeciais">Caracteres Especiais</span></div>
                 <div id="div_confirmarSenha">
                     <label>Confirme sua senha:</label>
                     <input type="password" id="iptConfirmacaoSenha" placeholder="********">
@@ -44,13 +48,13 @@
             <!-- <div id="div_aguardar" class="loading-div">
                 <img src="./assets/circle-loading.gif" id="loading-gif" />
             </div> -->
-            
+
             <div class="alerta_erro">
                 <div class="card_erro" id="cardErro">
                     <span id="mensagem_erro"></span>
                 </div>
             </div>
-            
+
             <div id="div_fazerCadastro">
                 Já possui conta? <a href="login.html">Acessar Conta!</a>
             </div>
@@ -59,24 +63,118 @@
         </div>
     </div>
 </body>
+
 </html>
 
 <script>
+    var senhaForte = false;
+    var senhaLetra = false;
+    var senhaNumero = false;
+    var senha8Caracteres = false;
+    var senhaEspeciais = false;
+
+    var senhaVar = iptSenha.value;
+
+    var letras = ['A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e',
+        'F', 'f', 'G', 'g', 'H', 'h', 'I', 'i', 'J', 'j',
+        'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o',
+        'P', 'p', 'Q', 'q', 'R', 'r', 'S', 's', 'T', 't',
+        'U', 'u', 'V', 'v', 'W', 'w', 'X', 'x', 'Y', 'y',
+        'Z', 'z'];
+
+    var numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    var especiais = ['!', '@', '#', '$', '%', '&', '*', '?', '_'];
+
+    function testarSenhaForte() {
+        if (iptSenha.value.length === 0) {
+            div_senhaForte.style.display = 'none'; // Oculta a mensagem
+            statusSenha.innerHTML = 'Senha Fraca.'; // Limpa o status
+            statusSenha.style.color = ''
+            min8.style.color = '';
+            senha8Caracteres = false;
+            return; // Sai da função ANTES de validar
+        }
+
+        div_senhaForte.style.display = 'block';
+        var senhaVar = iptSenha.value;
+
+        // Resetar estados ANTES dos loops
+        senhaLetra = false;
+        senhaNumero = false;
+        senhaEspeciais = false;
+        minLetras.style.color = '';
+        minNumeros.style.color = '';
+        minEspeciais.style.color = '';
+
+        //Testando Letras
+        for (var i = 0; i < letras.length; i++) {
+            if (senhaVar.includes(letras[i])) {
+                minLetras.style.color = '#00b728';
+                senhaLetra = true;
+                break;
+            } else if (!senhaVar.includes(letras[i])) {
+                minLetras.style.color = '';
+                senhaLetra = false;
+            }
+        }
+        //Testando Números
+        for (i = 0; i < numeros.length; i++) {
+            if (senhaVar.includes(numeros[i])) {
+                minNumeros.style.color = '#00b728';
+                senhaNumero = true;
+                break;
+            } else if (!senhaVar.includes(numeros[i])) {
+                minNumeros.style.color = '';
+                senhaNumero = false;
+            }
+        }
+        //Testando caracteres especiais
+        for (i = 0; i < especiais.length; i++) {
+            if (senhaVar.includes(especiais[i])) {
+                minEspeciais.style.color = '#00b728';
+                senhaEspeciais = true;
+                break;
+            } else if (!senhaVar.includes(especiais[i])) {
+                minEspeciais.style.color = '';
+                senhaEspeciais = false;
+            }
+        }
+
+        //Testando mínimo 8 caracteres
+        if (senhaVar.length >= 8) {
+            min8.style.color = '#00b728';
+            senha8Caracteres = true;
+        } else {
+            min8.style.color = '';
+            senha8Caracteres = false;
+        }
+
+        if (senha8Caracteres == true && senhaLetra == true && senhaNumero == true && senhaEspeciais == true) {
+            statusSenha.innerHTML = 'Senha Forte.';
+            statusSenha.style.color = '#00b728';
+            senhaForte = true;
+        } else {
+            statusSenha.innerHTML = 'Senha Fraca.';
+            statusSenha.style.color = '';
+            senhaForte = false;
+        }
+    }
     function cadastrar() {
         // aguardar();
-        
+
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
         var nomeVar = iptNome.value;
         var emailVar = iptEmail.value;
         var senhaVar = iptSenha.value;
         var confirmacaoSenhaVar = iptConfirmacaoSenha.value;
-        
+
         // Verificando se há algum campo em branco
         if (nomeVar == "" ||
             emailVar == "" ||
             senhaVar == "" ||
-            confirmacaoSenhaVar == "" 
+            confirmacaoSenhaVar == ""
         ) {
             div_cadastro.style.height = '93vh';
             cardErro.style.display = "block";
@@ -86,59 +184,63 @@
             return false;
         } else if (senhaVar != confirmacaoSenhaVar) {
             cardErro.style.display = "block";
-            mensagem_erro.innerHTML = "(Ops! As senhas estão diferentes. Tente novamente.)";
+            mensagem_erro.innerHTML = "Ops! As senhas estão diferentes. Tente novamente.";
 
             // finalizarAguardar();
             return false;
+        } else if (senhaForte == false) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Sua senha é muito fraca. Por favor digite uma senha mais forte";
+            console.log('falhou, ok')
         } else {
             setInterval(sumirMensagem, 5000);
-        }
 
-        // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
-            nomeServer: nomeVar,
-            emailServer: emailVar,
-            senhaServer: senhaVar
-            }),
-        })
-            .then(function (resposta) {
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                cardErro.style.display = "block";
-
-                mensagem_erro.innerHTML =
-                "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                setTimeout(() => {
-                window.location = "login.html";
-                }, "2000");
-
-                limparFormulario();
-                finalizarAguardar();
-            } else {
-                throw "Houve um erro ao tentar realizar o cadastro!";
-            }
+            // Enviando o valor da nova input
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                }),
             })
-            .catch(function (resposta) {
-                div_login.style.height = '65vh';
-                cardErro.style.display = "block"
-                mensagem_erro.innerHTML = "Erro ao realizar cadastro verifique se os dados estão corretos!";
-                console.log(`#ERRO: ${resposta}`);
-                finalizarAguardar();
-            });
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
 
-        return false;
+                    if (resposta.ok) {
+                        cardErro.style.display = "block";
+
+                        mensagem_erro.innerHTML =
+                            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                        setTimeout(() => {
+                            window.location = "login.html";
+                        }, "2000");
+
+                        limparFormulario();
+                        finalizarAguardar();
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    div_login.style.height = '65vh';
+                    cardErro.style.display = "block"
+                    mensagem_erro.innerHTML = "Erro ao realizar cadastro verifique se os dados estão corretos!";
+                    console.log(`#ERRO: ${resposta}`);
+                    finalizarAguardar();
+                });
+
+            return false;
+        }
     }
 
     function sumirMensagem() {
         cardErro.style.display = "none";
     }
-    </script>
+</script>
