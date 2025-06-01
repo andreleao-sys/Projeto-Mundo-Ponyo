@@ -85,16 +85,16 @@
                 </div>
                 <div class="container_grafico">
                     <div class="div_graficoLinha">
-                        <div class="titulo_grafico">Pontuação feita nas 10 últimas partidas</div>
+                        <div class="titulo_grafico">Pontuação feita nas últimas partidas</div>
                         <div class="graficoLinha">
                             <!-- <div id="grafico${item.id}" class="display-none"> -->
-                                <!-- <h3 class="tituloGraficos">
+                            <!-- <h3 class="tituloGraficos">
                                     <span id="tituloAquario${item.id}">${item.descricao}</span>
                                 </h3> -->
-                                <div class="graph">
-                                    <canvas id="myChartCanvas"></canvas>
-                                </div>
-                                <!-- <div class="label-captura">
+                            <div class="graph">
+                                <canvas id="myChartCanvas"></canvas>
+                            </div>
+                            <!-- <div class="label-captura">
                                     <p id="avisoCaptura${item.id}" style="color: white"></p>
                                 </div> -->
                             <!-- </div> -->
@@ -311,7 +311,7 @@
                     recordePonyoRun();
                     mediaPontuacaoPonyoRun(fkUsuario);
                     totalPartidasPonyoRun(fkUsuario);
-                    
+
                     window.addEventListener('load', obterDadosGrafico(fkUsuario))
 
                     // obterDadoGrafico(fkUsuario);
@@ -657,30 +657,33 @@
             config
         );
 
-        // setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
+        setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
     }
 
+    let activeUpdate = true; // Controle de estado  
     function atualizarGrafico(fkUsuario, dados, myChart) {
+        if (!activeUpdate) return; // Não continua se desativado
+
         var fkUsuario = sessionStorage.getItem("ID_USUARIO");
 
         fetch(`/dashboard/tempo-real/${fkUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 
-                    obterdados(fkUsuario);
+                    // obterdados(fkUsuario);
                     // alertar(novoRegistro, fkUsuario);
                     console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
                     console.log(`Dados atuais do gráfico:`);
                     console.log(dados);
 
-                    let avisoCaptura = document.getElementById(`avisoCaptura${fkUsuario}`)
-                    avisoCaptura.innerHTML = ""
+                    // let avisoCaptura = document.getElementById(`avisoCaptura${fkUsuario}`)
+                    // avisoCaptura.innerHTML = ""
 
 
                     if (novoRegistro[0].dtPartida_grafico == dados.labels[dados.labels.length - 1]) {
                         console.log("---------------------------------------------------------------")
                         console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
                         console.log("Horário do novo dado capturado:")
                         console.log(novoRegistro[0].dtPartida_grafico)
                         console.log("Horário do último dado capturado:")
@@ -701,12 +704,18 @@
                     }
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
+                    if (activeUpdate) {
+                        setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2500);
+                    }
+                    // proximaAtualizacao = setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
+                if (activeUpdate) {
+                    setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2500);
+                }
+                // proximaAtualizacao = setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
             }
         })
             .catch(function (error) {

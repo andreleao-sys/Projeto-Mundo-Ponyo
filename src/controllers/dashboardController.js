@@ -128,12 +128,14 @@ function buscarUltimasPartidas(req, res) {
 }
 
 function buscarPartidasEmTempoReal(req, res) {
+    const limite_linhas = 10;
+
 
     var fkUsuario = req.params.fkUsuario;
 
     console.log(`Recuperando partidas em tempo real`);
 
-    dashboardModel.buscarPartidasEmTempoReal(fkUsuario).then(function (resultado) {
+    dashboardModel.buscarPartidasEmTempoReal(fkUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

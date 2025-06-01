@@ -50,7 +50,7 @@ function buscarUltimasPartidas(fkUsuario, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarPartidasEmTempoReal(fkUsuario) {
+function buscarPartidasEmTempoReal(fkUsuario, limite_linhas) {
 
     var instrucaoSql = `SELECT pontuacao,
         DATE_FORMAT(dtPartida,'%d-%m %H:%i:%s') as dtPartida_grafico
