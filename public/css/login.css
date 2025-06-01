@@ -21,7 +21,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('../assets/img/ponyo041.jpg');
+    background-image: url('../assets/img/ponyo039.jpg');
     background-size: cover;
 }
 #div_login {
@@ -66,8 +66,8 @@ input {
     border-width: 3px;
     border-radius: 7px;
     border-style: solid;
-    border-color: rgb(220, 220, 220);
-    background-color: whitesmoke;
+    border-color: rgb(195, 195, 195);
+    background-color: rgba(245, 245, 245, 0.487);
     font-size: 1rem;
     width: 96%;
     text-indent: 2%;

@@ -71,7 +71,7 @@ section {
     width: 100%;
 }
 #nav_links {
-    width: 55%;
+    width: 57%;
 }
 #nav_links ul{
     list-style: none;
@@ -155,6 +155,7 @@ section {
     padding-top: 1%;
     /* justify-content: center; */
     /* align-items: center; */
+    padding-left: 3%;
 
 }
 .div_logo {
@@ -211,74 +212,237 @@ section {
 #sobre_filme {
     width: 100%;
     height: 100vh;
-    scroll-margin-top: 0rem;
-    background-color: rgb(25, 103, 131);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.div_cartaz {
-    width: 23%;
-    height: 68vh;
-    background-color: #d82e2e;
-    display: flex;
-    justify-content: center;
-    align-items: end;
-}
-.div_cartaz img {
-    width: 100%;
-    /* filter: contrast(1) saturate(1.5); */
-}
-.div_conteudoFilme {
-    width: 65%;
-    height: 70%;
+    scroll-margin-top: 4rem;
+    /* color: rgb(0, 41, 56); */
+    background-color: rgb(0, 76, 103);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    /* background-color: black; */
-    margin-left: 2%;
-    text-align: justify;
+    justify-content: start;
 }
-.div_txt1Filme {
+.div_traco {
+    width: 85%;
+    height: 1%;
+    /* background-color: #00394f; */
+    margin-top: 2.5%;
+    display: flex;
+    justify-content: center;
+}
+.traco {
+    width: 17%;
+    height: 100%;
+    background-color: #d82e2e;
+}
+.container_conteudo {
+    /* background-color: #00425c; */
+    width: 85%;
+    height: 77%;
+}
+.titulo {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color:  #014059; */
+    font-size: 250%;
+    font-weight: 800;
+    padding-top: 0.5%;
+    padding-bottom: 2%;
+}
+.div_conteudo {
+    width: 100%;
+    height: 89%;
     /* background-color: aqua; */
-    height: 70vh;
-    margin-left: 2%;
-}
-.txt1Filme {
-    width: 100%;
-    /* background-color: aqua; */
-    margin-bottom: 2%;
-}
-.div_txt2Filme {
-    width: 48%;
-}
-.div_txt2FilmeComVideo {
-    width: 100%;
-    height: 80%;
-    /* background-color: #d82e2e; */
     display: flex;
     justify-content: space-between;
-}
-.div_video1Sobre {
-    width: 50%;
-    height: 98%;
-}
-.video1Sobre {
     width: 100%;
-    object-fit: cover;
+    height: 89%;
 }
+.div_conteudoEsquerda {
+    width: 49.5%;
+    height: 100%;
+    /* background-color: #d82e2e; */
+}
+.div_conteudoEsquerda img {
+    height: 100%;
+}
+.video_container {
+    width: 100%;
+    height: 97%;
+    /* background-color: aqua; */
+}
+.videoSectionSobre {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.3);
+}
+.div_conteudoDireita {
+    width: 49%;
+    height: 100%;
+    text-align: justify;
+    /* background-color: #b11717; */
+}
+.div_txtInfoFilme {
+    width: 100%;
+    height: 27%;
+    background-color: #004261;
+}
+#personagens {
+    background-color: rgb(0, 68, 93);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+#hayao_miyazaki {
+    scroll-margin-top: 4rem;
+    background-color: rgb(9, 55, 72);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+.div_tracoMiyazaki {
+    width: 85%;
+    height: 1%;
+    /* background-color: #00394f; */
+    margin-top: 2.5%;
+    display: flex;
+    justify-content: start;
+}
+.tracoMiyazaki {
+    width: 17%;
+    height: 100%;
+    background-color: #d82e2e;
+}
+
+.container_conteudoMiyazaki {
+    /* background-color: #00425c; */
+    width: 85%;
+    height: 77%;
+    background-color: aqua;
+}
+.tituloMiyazaki {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    /* background-color:  #014059; */
+    font-size: 250%;
+    font-weight: 800;
+    padding-top: 0.5%;
+    padding-bottom: 2%;
+}
+.div_conteudoMiyazaki {
+    width: 100%;
+    height: 89%;
+    background-color: rgb(8, 164, 164);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 89%;
+}
+.div_conteudoEsquerdaMiyazaki {
+    width: 63%;
+    height: 100%;
+    background-color: #d82e2e;
+    text-align: justify;
+}
+.div_txtInfoMiyazaki {
+    width: 100%;
+    height: 38.5%;
+    background-color: rgb(0, 0, 0);
+}
+
+.div_conteudoDireitaMiyazaki {
+    width: 35%;
+    height: 100%;
+    text-align: justify;
+    background-color: #d82e2e;
+    /* background-color: #b11717; */
+}
+.img_miyazaki {
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/img/fotoMiyazaki1.webp');
+    background-size: cover;
+    background-position-x: right;
+}
+
 #galeria {
     background-color: rgb(21, 87, 111);
 }
-#hayao_miyazaki {
-    background-color: rgb(9, 55, 72);
-}
-#quiz {
+
+#reflexao {
     background-color: rgb(0, 31, 42);
 }
 
 #desenvolvedor {
-    background-color: rgb(0, 15, 21);
+    scroll-margin-top: 4rem;
+    background-color: rgb(0, 19, 27);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+.container_conteudoDev {
+    /* background-color: #00425c; */
+    width: 85%;
+    height: 77%;
+}
+.div_conteudoDev {
+    width: 100%;
+    height: 89%;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 80%;
+    gap: 2%;
+    margin-top: 2%;
+}
+.div_conteudoEsquerdaDev {
+    width: 33%;
+    height: 100%;
+    /* background-color: #d82e2e; */
+}
+/* .div_conteudoEsquerdaDev img {
+    height: 100%;
+} */
+.img_container {
+    width: 100%;
+    height: 97%;
+    /* border: 5px solid whitesmoke; */
+    /* background-color: aqua; */
+}
+.img_container {
+    background-image: url('../assets/img/fotoPerfil.jpeg');
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    object-position: top;
+    filter: saturate(1.3);
+    transition: background-image 0.3s ease-out;
+}
+.img_container:hover {
+    background-image: url('../assets/img/andrezinho.jpeg');
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    object-position: top;
+    filter: saturate(1.3);
+}
+.div_conteudoDireitaDev {
+    width: 50%;
+    height: 100%;
+    text-align: justify;
+    /* background-color: #b11717; */
+}
+.div_tituloNomeDev {
+    width: 100%;
+    padding-bottom: 2%;
+    font-size: 250%;
+    font-weight: 600;
+    display: flex;
+    align-items: start;
 }
