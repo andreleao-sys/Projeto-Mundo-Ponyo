@@ -24,8 +24,17 @@ body {
     background-image: url('../assets/img/ponyo039.jpg');
     background-size: cover;
 }
+#container img {
+    position: absolute;
+    top: 3%;
+    left: 2%;
+}
+#container img:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
 #div_login {
-    background-color: rgba(255, 255, 255, 0.841);
+    background-color: rgba(255, 255, 255, 0.8);
     width: 30%;
     height: 60vh;
     border-radius: 13px;
@@ -36,8 +45,8 @@ body {
 }
 #div_titulo {
     font-size: 2.3rem;
-    font-family: 'Poppins', sans-serif;
-    /* font-weight: 600; */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
     padding-bottom: 5%;
 }
 #corpo_login {
@@ -67,7 +76,7 @@ input {
     border-radius: 7px;
     border-style: solid;
     border-color: rgb(195, 195, 195);
-    background-color: rgba(245, 245, 245, 0.487);
+    background-color: rgba(245, 245, 245, 0.450);
     font-size: 1rem;
     width: 96%;
     text-indent: 2%;

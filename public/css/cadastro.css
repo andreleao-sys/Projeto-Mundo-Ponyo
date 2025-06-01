@@ -13,11 +13,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('../assets/img/ponyo006.jpg');
+    background-image: url('../assets/img/ponyo036.jpg');
 }
 
 #div_cadastro {
-    background-color:rgba(255, 255, 255, 0.841);
+    background-color:rgba(255, 255, 255, 0.8);
     width: 36%;
     height: 90vh;
     border-radius: 13px;
