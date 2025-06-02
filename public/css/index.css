@@ -59,7 +59,7 @@ section {
     width: 100%;
     height: 12%;
     position: fixed;
-    z-index: 2;
+    z-index: 10;
 }
 #nav_logo {
     width: 9%;
@@ -236,7 +236,7 @@ section {
 .container_conteudo {
     /* background-color: #00425c; */
     width: 85%;
-    height: 77%;
+    height: 78%;
 }
 .titulo {
     width: 100%;
@@ -321,7 +321,9 @@ section {
     /* background-color: #00425c; */
     width: 85%;
     height: 77%;
-    background-color: aqua;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: space-between;
 }
 .tituloMiyazaki {
     width: 100%;
@@ -336,22 +338,32 @@ section {
 .div_conteudoMiyazaki {
     width: 100%;
     height: 89%;
-    background-color: rgb(8, 164, 164);
+    /* background-color: rgb(8, 164, 164);  */
+}
+.div_ghibli {
+    width: 100%;
+    /* background-color: beige; */
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    height: 89%;
+}
+.div_textoGhibli {
+    /* background-color: #d82e2e; */
+    width: 45%;
 }
 .div_conteudoEsquerdaMiyazaki {
     width: 63%;
-    height: 100%;
-    background-color: #d82e2e;
+    height: 99%;
+    /* background-color: #d82e2e; */
     text-align: justify;
 }
-.div_txtInfoMiyazaki {
+.div_imgGhibli {
+    width: 52%;
+    height: 120%;
+    /* background-color: rgb(0, 0, 0); */
+}
+.div_imgGhibli img {
     width: 100%;
-    height: 38.5%;
-    background-color: rgb(0, 0, 0);
+    object-fit: cover;
 }
 
 .div_conteudoDireitaMiyazaki {
@@ -364,19 +376,166 @@ section {
 .img_miyazaki {
     width: 100%;
     height: 100%;
-    background-image: url('../assets/img/fotoMiyazaki1.webp');
+    background-image: url('../assets/img/miyazaki.jpg');
     background-size: cover;
     background-position-x: right;
 }
 
+#artesMiyazaki {
+    scroll-margin-top: 4rem;
+    background-color: rgb(0, 44, 59);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+/* #reflexao {
+    background-color: rgb(0, 53, 74);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.div_textReflexao {
+    position: absolute;
+    width: 60%;
+    font-size: 150%;
+    text-align: center;
+    z-index: 3;
+    font-style: italic;
+}
+.camadaBlack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.6);
+    z-index: 2;
+}
+.video_containerReflexao {
+    width: 120%;
+    height: 100%;
+    filter: saturate(1.3);
+    z-index: 1;
+}
+.videoSectionReflexao {
+    width: 85%;
+    height: 100%;
+    object-fit: cover;
+} */
+
 #galeria {
-    background-color: rgb(21, 87, 111);
+    background-color: rgb(0, 38, 52);
+    scroll-margin-top: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+.div_mensagemGaleria {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1%;
+    font-size: 110%;
+}
+.div_conteudoGaleria {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    filter: saturate(1.2);
+}
+.div_galeria1 {
+    width: 100%;
+    height: 49%;
+    display: flex;
+    justify-content: space-between;
+}
+.fotoSolo {
+    width: 52%;
+    height: 100%;
+    background-color: aliceblue;
+}
+.fotoSolo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.fotoQuarteto {
+    width: 47%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.div_fotoDuo {
+    width: 49%;
+    height: 100%;
+}
+.fotoQuarteto img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.div_galeria2 {
+    width: 100%;
+    height: 49%;
+    display: flex;
+    justify-content: space-between;
+}
+.div_conteudoGaleria img {
+    transition: 0.3s ease-in-out;
+}
+.div_conteudoGaleria img:hover {
+    transform: scale(1.015);
 }
 
-#reflexao {
-    background-color: rgb(0, 31, 42);
+#jogo {
+    background-color: rgb(0, 28, 38);
+    scroll-margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-top: 10%;
 }
-
+.div_textoJogo {
+    font-size: 270%;
+    font-weight: 600;
+    text-align: center;
+    margin-right: 5%;
+    width: 60%;
+}
+.div_textoJogo span {
+    font-size: 210%;
+    font-weight: 700;
+}
+.div_tracoJogo {
+    width: 85%;
+    height: 2%;
+    /* background-color: #00394f; */
+    margin-top: 7%;
+    margin-bottom: 7%;
+    margin-left: 7%;
+    display: flex;
+    justify-content: center;
+}
+.tracoJogo {
+    width: 50%;
+    height: 100%;
+    background-color: #d82e2e;
+}
+.fotoJogo {
+    width: 70%;
+    height: 95%;
+}
+.fotoJogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+}
 #desenvolvedor {
     scroll-margin-top: 4rem;
     background-color: rgb(0, 19, 27);
@@ -416,12 +575,13 @@ section {
     /* background-color: aqua; */
 }
 .img_container {
-    background-image: url('../assets/img/fotoPerfil.jpeg');
+    background-image: url('../assets/img/Andre.png');
     width: 100%;
     height: 100%;
     background-size: cover;
+    background-position: center;
     object-position: top;
-    filter: saturate(1.3);
+    filter: saturate(1.5);
     transition: background-image 0.3s ease-out;
 }
 .img_container:hover {
@@ -433,7 +593,7 @@ section {
     filter: saturate(1.3);
 }
 .div_conteudoDireitaDev {
-    width: 50%;
+    width: 55%;
     height: 100%;
     text-align: justify;
     /* background-color: #b11717; */
@@ -446,3 +606,4 @@ section {
     display: flex;
     align-items: start;
 }
+
