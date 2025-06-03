@@ -192,7 +192,7 @@
         } else if (senhaForte == false) {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = "Sua senha é muito fraca. Por favor digite uma senha mais forte";
-            console.log('falhou, ok')
+            console.log('falhou')
         } else {
             setInterval(sumirMensagem, 5000);
 
@@ -216,21 +216,24 @@
                     if (resposta.ok) {
                         cardErro.style.display = "block";
 
+                        mensagem_erro.style.color = 'green';
                         mensagem_erro.innerHTML =
                             "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
                         setTimeout(() => {
                             window.location = "login.html";
-                        }, "2000");
+                        }, "3500");
 
                         limparFormulario();
                         finalizarAguardar();
                     } else {
                         throw "Houve um erro ao tentar realizar o cadastro!";
+                        cardErro.style.display = "block";
+                        mensagem_erro.innerHTML = "Sua senha é muito fraca. Por favor digite uma senha mais forte";
                     }
                 })
                 .catch(function (resposta) {
-                    div_login.style.height = '65vh';
+                    // div_login.style.height = '65vh';
                     cardErro.style.display = "block"
                     mensagem_erro.innerHTML = "Erro ao realizar cadastro verifique se os dados estão corretos!";
                     console.log(`#ERRO: ${resposta}`);
