@@ -161,6 +161,7 @@
             senhaForte = false;
         }
     }
+
     function cadastrar() {
         // aguardar();
 
@@ -193,6 +194,13 @@
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = "Sua senha é muito fraca. Por favor digite uma senha mais forte";
             console.log('falhou')
+        } else if (!emailVar.includes('@')) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "E-mail inválido!";
+        } else if (!emailVar.includes('.com') && !emailVar.includes('.br') && !emailVar.includes('.net') 
+                    && !emailVar.includes('.info') && !emailVar.includes('.biz') && !emailVar.includes('.school')) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "E-mail com extensão de domínio inválida!";
         } else {
             setInterval(sumirMensagem, 5000);
 
@@ -228,14 +236,12 @@
                         finalizarAguardar();
                     } else {
                         throw "Houve um erro ao tentar realizar o cadastro!";
-                        cardErro.style.display = "block";
-                        mensagem_erro.innerHTML = "Sua senha é muito fraca. Por favor digite uma senha mais forte";
+                        cardErro.style.display = "block"
+                        mensagem_erro.innerHTML = "Erro ao realizar cadastro verifique se os dados estão corretos!";
                     }
                 })
                 .catch(function (resposta) {
                     // div_login.style.height = '65vh';
-                    cardErro.style.display = "block"
-                    mensagem_erro.innerHTML = "Erro ao realizar cadastro verifique se os dados estão corretos!";
                     console.log(`#ERRO: ${resposta}`);
                     finalizarAguardar();
                 });
