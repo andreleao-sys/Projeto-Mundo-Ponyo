@@ -139,13 +139,14 @@ section {
     cursor: pointer;
 }
 .conteudo_dashboard {
-    width: 83%;
+    width: 70%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     /* display: none; */
     color: #004d7a;
+    margin-left: 7%;
 }
 .corpo_dashboard {
     width: 93%;
@@ -161,7 +162,7 @@ section {
     justify-content: space-between;
 }
 .kpi {
-    width: 19%;
+    width: 32%;
     height: 100%;
     background-color:whitesmoke;
     border-radius: 5px;
@@ -201,7 +202,7 @@ section {
     align-items: end;
 }
 .div_graficoLinha {
-    width: 59.5%;
+    width: 100%;
     height: 97%;
     background-color:whitesmoke;
     display: flex;
@@ -241,15 +242,16 @@ section {
 }
 .graficoLinha {
     width: 100%;
-    height: 80%;
+    height: 90%;
     /* background-color: #d82e2e; */
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 12%;
 }
 .graph {
     width: 90%;
-    /* height: 90%; */
+    height: 80%;
 }
 #myChartCanvas {
     width: 100%;
