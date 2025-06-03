@@ -41,7 +41,7 @@ function buscarTotalPartidas(fkUsuario) {
 function buscarUltimasPartidas(fkUsuario, limite_linhas) {
 
     var instrucaoSql = `SELECT pontuacao,
-        DATE_FORMAT(dtPartida,'%d-%m %H:%i:%s') as dtPartida_grafico
+        DATE_FORMAT(dtPartida,'%d/%m %H:%i:%s') as dtPartida_grafico
                     FROM partida
                     WHERE fkUsuario = ${fkUsuario}
                     ORDER BY dtPartida DESC LIMIT ${limite_linhas}`;
@@ -53,7 +53,7 @@ function buscarUltimasPartidas(fkUsuario, limite_linhas) {
 function buscarPartidasEmTempoReal(fkUsuario, limite_linhas) {
 
     var instrucaoSql = `SELECT pontuacao,
-        DATE_FORMAT(dtPartida,'%d-%m %H:%i:%s') as dtPartida_grafico
+        DATE_FORMAT(dtPartida,'%d/%m %H:%i:%s') as dtPartida_grafico
                     FROM partida
                     WHERE fkUsuario = ${fkUsuario}
                     ORDER BY dtPartida DESC LIMIT ${limite_linhas}`;

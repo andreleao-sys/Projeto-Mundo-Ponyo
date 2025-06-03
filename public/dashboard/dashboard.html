@@ -43,12 +43,6 @@
                             Jogo
                         </div>
                     </div>
-                    <!-- <div class="link" onclick="ativarRanking()" id="link_ranking">
-                        <img src="../assets/img/trofeu-icone.png" alt="Ranking" style="width: 20px;">
-                        <div class="textLink">
-                            Ranking
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div id="div_sair">
@@ -71,17 +65,10 @@
                         <div class="dado_kpi" id="kpi_mediaPontuacao">0 m</div>
                     </div>
                     <div class="kpi">
-                        <div class="titulo_kpi">Total de partidas Jogadas</div>
+                        <div class="titulo_kpi">Total de Partidas Jogadas</div>
                         <div class="dado_kpi" id="kpi_totalPartidas">0</div>
                     </div>
-                    <!-- <div class="kpi">
-                        <div class="titulo_kpi">Tempo de Jogo Acumulado</div>
-                        <div class="dado_kpi">0 min</div>
-                    </div>
-                    <div class="kpi">
-                        <div class="titulo_kpi">Personagem Favorito</div>
-                        <div class="dado_kpi">――――</div>
-                    </div> -->
+                    
                 </div>
                 <div class="container_grafico">
                     <div class="div_graficoLinha">
@@ -92,7 +79,7 @@
                                     <span id="tituloAquario${item.id}">${item.descricao}</span>
                                 </h3> -->
                             <div class="graph">
-                                <canvas id="myChartCanvas"></canvas>
+                                <canvas id="myChartCanvas" style="position: absolute; width: 55vw; height: 40vh;"></canvas>
                             </div>
                             <!-- <div class="label-captura">
                                     <p id="avisoCaptura${item.id}" style="color: white"></p>
@@ -208,7 +195,6 @@
                 <div id="gradient-cenario-top"></div>
                 <div class="div_indicadores_jogo">
                     <div id="div_tempo">
-                        <!-- <h1>00:00:00</h1> -->
                     </div>
                     <div id="div_pontuacao">
                         <h1 id="h1_pontuacao">0 m</h1>
@@ -216,7 +202,6 @@
                 </div>
                 <div id="gradient-cenario-bottom"></div>
                 <img src="../assets/img/cenario-jogo-ponyo.png" class="cenario">
-                <!-- <img src="assets/img/clouds.png" class="clouds"> -->
                 <img src="../assets/img/ponyo.gif" class="ponyo">
                 <img src="../assets/img/onda1.1.gif" class="obstaculo">
                 <div id="div_btIniciar">
@@ -250,7 +235,7 @@
 <script>
     div_bemVindo.innerHTML = `Olá,&nbsp <b>${sessionStorage.NOME_USUARIO}</b>`;
     var fkUsuario = sessionStorage.getItem("ID_USUARIO");
-    let proximaAtualizacao;
+    // let proximaAtualizacao;
 
     //JOGO
     var pontuacao = 0;
@@ -322,7 +307,7 @@
                 console.log('temp onda: ' + tempoDaOnda);
                 if (indiceVelocidade > 50.99 && obstaculoPosition < -50 && tempoDaOnda == 2.5) {
                     tempoDaOnda -= 0.3;
-                    // // 1. Pausa a animação e congela a posição atual
+                    //Pausa a animação e congela a posição atual
                     obstaculo.style.animation = 'none';
                     void obstaculo.offsetWidth; // Truque mágico (força a pausa)
 
@@ -330,7 +315,7 @@
                     indiceVelocidade = 0;
                 } else if (indiceVelocidade > 50.99 && obstaculoPosition < -50 && tempoDaOnda >= 1.4) {
                     tempoDaOnda -= 0.4;
-                    // // 1. Pausa a animação e congela a posição atual
+                    //Pausa a animação e congela a posição atual
                     obstaculo.style.animation = 'none';
                     void obstaculo.offsetWidth; // Truque mágico (força a pausa)
 
@@ -580,9 +565,9 @@
 
         // alterarTitulo(fkUsuario)
 
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
+        // if (proximaAtualizacao != undefined) {
+        //     clearTimeout(proximaAtualizacao);
+        // }
 
         var fkUsuario = sessionStorage.getItem("ID_USUARIO");
 
@@ -621,8 +606,9 @@
                     data: [],
                     fill: false,
                     borderColor: 'rgb(199, 52, 52)',
-                    tension: 0.1
-                }]
+                    backgroundColor: 'rgb(210, 52, 52)',
+                    tension: 0.2
+                }],            
         };
 
         console.log('----------------------------------------------')
@@ -634,7 +620,6 @@
             var registro = resposta[i];
             labels.push(registro.dtPartida_grafico);
             dados.datasets[0].data.push(registro.pontuacao);
-            // dados.datasets[1].data.push(registro.temperatura);
         }
 
         console.log('----------------------------------------------')
@@ -660,9 +645,7 @@
         setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
     }
 
-    let activeUpdate = true; // Controle de estado  
     function atualizarGrafico(fkUsuario, dados, myChart) {
-        if (!activeUpdate) return; // Não continua se desativado
 
         var fkUsuario = sessionStorage.getItem("ID_USUARIO");
 
@@ -696,17 +679,16 @@
                         myChart.update();
                     }
 
-                    if (activeUpdate) {
                         setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2500);
-                    }
+                    
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     // proximaAtualizacao = setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
-                if (activeUpdate) {
+
                     setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2500);
-                }
+
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                 // proximaAtualizacao = setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
             }

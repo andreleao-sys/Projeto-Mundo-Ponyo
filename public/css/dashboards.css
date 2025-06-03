@@ -53,12 +53,7 @@ section {
     height: 100vh;
     background-color: rgb(210, 210, 210);
 }
-/* .conteudo_dashboard, 
-.conteudo_galeria, 
-.conteudo_jogo, 
-.conteudo_ranking {
-    display: none !important;
-} */
+
 .nav_lateral {
     width: 17%;
     height: 100vh;
@@ -147,6 +142,7 @@ section {
     /* display: none; */
     color: #004d7a;
     margin-left: 7%;
+    overflow: hidden;
 }
 .corpo_dashboard {
     width: 93%;
@@ -225,6 +221,7 @@ section {
     height: 15%;
     display: flex;
     align-items: center;
+    justify-content: center;
     font-size: 115%;
     font-weight: 650;
     margin-left: 4%;
@@ -247,15 +244,21 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 12%;
+    /* margin-left: 12%; */
 }
 .graph {
-    width: 90%;
-    height: 80%;
+    width: 100%;
+    height: 82%;
+    position: relative;
+    /* background-color: #00304a; */
+    display: flex;
+    justify-content: center;
 }
 #myChartCanvas {
     width: 100%;
+    height: 100%;
 }
+
 .graficoPizza {
     width: 100%;
     height: 80%;
