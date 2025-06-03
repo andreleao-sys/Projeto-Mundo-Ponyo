@@ -339,14 +339,14 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: contrast(1.1) saturate(1.3) sepia(0);
+    filter: contrast(1.1) saturate(1.1) sepia(0);
     transition: 0.5s ease-out;
 }
 .linha_fotos img:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: contrast(1.1) saturate(1.3) sepia(0);
+    filter: contrast(1.1) saturate(1.1) sepia(0);
     transform: scale(1.03);
     transition: 0.5s ease;
 }
@@ -356,7 +356,7 @@ section {
     margin-bottom: 1%;
 }
 .div_arts .linha_fotos img {
-    filter: contrast(1.1) saturate(2) sepia(0) ;
+    filter: contrast(1.1) saturate(1.3) sepia(0) ;
 
 }
 .conteudo_jogo {
