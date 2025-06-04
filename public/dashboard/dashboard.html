@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" type="imagex/png" href="../assets/img/ponyo-icone.png">
     <link rel="stylesheet" type="text/css" href="../css/dashboards.css" media="screen" />
-    <title>Mundo Ponyo</title>
+    <title>Mundo Ponyo | Área de Usuário</title>
 
     <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -61,7 +61,7 @@
                         <div class="dado_kpi" id="kpi_recorde">0 m</div>
                     </div>
                     <div class="kpi">
-                        <div class="titulo_kpi">Média de Pontuação por partida</div>
+                        <div class="titulo_kpi">Média de Pontuação por Partida</div>
                         <div class="dado_kpi" id="kpi_mediaPontuacao">0 m</div>
                     </div>
                     <div class="kpi">
@@ -72,25 +72,16 @@
                 </div>
                 <div class="container_grafico">
                     <div class="div_graficoLinha">
-                        <div class="titulo_grafico">Pontuação feita nas últimas partidas</div>
+                        <div class="titulo_grafico">Pontuação feita nas Últimas Partidas</div>
                         <div class="graficoLinha">
-                            <!-- <div id="grafico${item.id}" class="display-none"> -->
-                            <!-- <h3 class="tituloGraficos">
-                                    <span id="tituloAquario${item.id}">${item.descricao}</span>
-                                </h3> -->
+                            
                             <div class="graph">
                                 <canvas id="myChartCanvas" style="position: absolute; width: 55vw; height: 40vh;"></canvas>
                             </div>
-                            <!-- <div class="label-captura">
-                                    <p id="avisoCaptura${item.id}" style="color: white"></p>
-                                </div> -->
-                            <!-- </div> -->
+                            
                         </div>
                     </div>
-                    <!-- <div class="div_graficoPizza">
-                        <div class="titulo_graficoPizza">Quantidade de partidas jogadas com cada personagem</div>
-                        <div class="graficoPizza"></div>
-                    </div> -->
+                    
                 </div>
             </div>
         </div>
@@ -317,11 +308,15 @@
                     </div>
                 </div>
             </div>
+
+            <div class="div_tutorial">
+                Pressione a tecla de <b>ESPAÇO</b> para pular sobre as ondas
+            </div>
         </div>
 
         <!-- Ranking -->
         <div class="conteudo_ranking">
-            <div class="titulo_conteudo">Ranking</div>
+            <div class="titulo_conteudo"></div>
         </div>
     </section>
 </body>
@@ -366,7 +361,6 @@
             console.log('onda:' + obstaculoPosition);
 
 
-
             //Verifica a colisão
             if ((obstaculoPosition <= 90 && obstaculoPosition > 0 && ponyoPosition < 85) || (obstaculoPosition < 0 && obstaculoPosition > -50 && ponyoPosition < 43)) {
                 recorde_usuario.innerHTML = `Recorde: ${pontuacao.toFixed()} m`
@@ -404,7 +398,11 @@
                     tempoDaOnda -= 0.3;
                     //Pausa a animação e congela a posição atual
                     obstaculo.style.animation = 'none';
-                    void obstaculo.offsetWidth; // Truque mágico (força a pausa)
+                    void obstaculo.offsetWidth; // Força aplicação da pausa imediata
+
+                    //O navegador interrompe qualquer otimização que estava fazendo
+                    //Recalcula todas as propriedades geométricas do elemento e seus filhos
+                    //Garante que o estado visual esteja atualizado
 
                     obstaculo.style.animation = `obstaculo-animation ${tempoDaOnda}s infinite linear`;
                     indiceVelocidade = 0;
@@ -412,7 +410,7 @@
                     tempoDaOnda -= 0.4;
                     //Pausa a animação e congela a posição atual
                     obstaculo.style.animation = 'none';
-                    void obstaculo.offsetWidth; // Truque mágico (força a pausa)
+                    void obstaculo.offsetWidth; // Força aplicação da pausa imediata
 
                     obstaculo.style.animation = `obstaculo-animation ${tempoDaOnda}s infinite linear`;
                     indiceVelocidade = 0;

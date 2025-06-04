@@ -158,7 +158,7 @@ section {
     justify-content: space-between;
 }
 .kpi {
-    width: 32%;
+    width: 32.3%;
     height: 100%;
     background-color:whitesmoke;
     border-radius: 5px;
@@ -169,7 +169,7 @@ section {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .titulo_kpi {
-    width: 80%;
+    width: 85%;
     height: 45%;
     display: flex;
     justify-content: center;
@@ -184,7 +184,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 200%;
+    font-size: 230%;
     font-weight: 700;
     margin-top: -4%;
     color: #004d7a;
@@ -367,14 +367,7 @@ section {
     align-items: center;
     display: none;
 }
-.conteudo_ranking {
-    width: 83%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    display: none;
-}
+
 .titulo_conteudo {
     font-size: 230%;
     font-weight: 700;
@@ -558,4 +551,9 @@ section {
     to {
         right: 100%;
     }
+}
+.div_tutorial {
+    margin-top: 7%;
+    font-size: 130%;
+    color:rgba(0, 0, 0, 0.6);
 }

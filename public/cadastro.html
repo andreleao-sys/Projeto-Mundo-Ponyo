@@ -183,7 +183,11 @@
             mensagem_erro.innerHTML = "Ops! Campo vazio, por favor preencha todos os campos em branco";
 
             // finalizarAguardar();
+
             return false;
+            //Interrompe a execução da função imediatamente
+            //Evita que o código continue para as próximas validações ou tentativa de cadastro
+
         } else if (senhaVar != confirmacaoSenhaVar) {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = "Ops! As senhas estão diferentes. Tente novamente.";
@@ -194,13 +198,16 @@
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = "Sua senha é muito fraca. Por favor digite uma senha mais forte";
             console.log('falhou')
+            return false;
         } else if (!emailVar.includes('@')) {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = "E-mail inválido!";
+            return false;
         } else if (!emailVar.includes('.com') && !emailVar.includes('.br') && !emailVar.includes('.net') 
                     && !emailVar.includes('.info') && !emailVar.includes('.biz') && !emailVar.includes('.school')) {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = "E-mail com extensão de domínio inválida!";
+            return false;
         } else {
             setInterval(sumirMensagem, 5000);
 
@@ -236,6 +243,9 @@
                         finalizarAguardar();
                     } else {
                         throw "Houve um erro ao tentar realizar o cadastro!";
+                        //Interrompe o fluxo normal do .then()
+                        //Desvia a execução direto para o bloco .catch()
+
                         cardErro.style.display = "block"
                         mensagem_erro.innerHTML = "Erro ao realizar cadastro verifique se os dados estão corretos!";
                     }
@@ -246,7 +256,11 @@
                     finalizarAguardar();
                 });
 
+
             return false;
+            //Evita o comportamento padrão de submit do formulário
+            //Permite que o JavaScript controle todo o fluxo
+            //Importante para SPAs (Single Page Applications) onde você não quer recarregar a página
         }
     }
 
