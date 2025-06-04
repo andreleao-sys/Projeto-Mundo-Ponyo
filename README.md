@@ -1,8 +1,3 @@
-
-<p align="center">
-    <img src="../Projeto-Mundo-Ponyo/public/assets/img/logo-mundo-ponyo.png" width="300px">
-</p>
-
 # Projeto Mundo Ponyo
 Esse projeto é a minha homenagem ao filme "Ponyo: Uma Amizade que Veio do Mar" (Studio Ghibli), filme que sou apaixonado desde pequeno. No início, eu apenas sentia a magia do filme, mas com os anos passei a entender suas camadas mais profundas - e foi assim que descobri o Studio Ghibli e me tornei fã do Miyazaki. Ponyo e outros trabalhos do estúdio moldaram minha forma de ver o mundo, influenciaram minhas amizades e sempre me inspiraram a desenhar, um hobby que carrego até hoje.
 <br>
@@ -19,10 +14,6 @@ Esse projeto é a minha homenagem ao filme "Ponyo: Uma Amizade que Veio do Mar" 
 
 Não vou dar tantos spoiler do que você pode encontrar para tornar a sua experiência o mais única e nostalgica possível, assim com foi para mim na infância, mas quando você acessar espero que por meio deste site eu tenha conseguido transmitir para você o quanto esse filme mudou a minha vida. Muito obrigado! :)
 
-
-<p align="center">
-    <img src="../Projeto-Mundo-Ponyo/public/assets/img/ponyo049.jpg" width="700px">
-</p>
 
 
 ## Tecnologias utilizadas
