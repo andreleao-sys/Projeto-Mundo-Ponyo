@@ -115,51 +115,6 @@
 
     </section>
 
-    <!--<section id="personagens">
-        <div class="div_traco">
-            <div class="traco"></div>
-        </div>
-        <div class="container_conteudo">
-            <div class="titulo">
-                <span>Personagens</span>
-            </div>
-            <div class="div_conteudo">
-                <div class="div_conteudoEsquerda">
-                    <div class="video_container">
-                        <video autoplay muted loop class="videoSectionSobre">
-                            <source src="assets/videos/videoSobre1.mp4" type="video/mp4">
-                            Seu navegador não suporta esse arquivo de vídeo
-                        </video>
-                    </div>
-                </div>
-                <div class="div_conteudoDireita">
-                    <div class="div_texto">
-                        <span>
-                            Ponyo é um filme de animação produzido pelo Studio Ghibli e dirigido por Hayao Miyazaki em
-                            2008. É o oitavo filme dirigido por Miyazaki para o Studio Ghibli e seu décimo no geral. O
-                            filme conta a história de Ponyo, uma peixinha dourada que escapa do oceano e é resgatada por
-                            um menino humano de cinco anos, Sōsuke, após dar à costa enquanto estava presa em um jarro
-                            de vidro. À medida que eles se unem, Ponyo deseja se tornar uma garota humana, contra as
-                            circunstâncias devastadoras causadas por sua aquisição e uso de magia.
-                        </span>
-                        <br><br>
-                        <span>
-                            Ponyo é um filme de animação produzido pelo Studio Ghibli e dirigido por Hayao Miyazaki em
-                            2008. É o oitavo filme dirigido por Miyazaki para o Studio Ghibli e seu décimo no geral. O
-                            filme conta a história de Ponyo, uma peixinha dourada que escapa do oceano e é resgatada por
-                            um menino humano de cinco anos, Sōsuke, após dar à costa enquanto estava presa em um jarro
-                            de vidro. À medida que eles se unem, Ponyo deseja se tornar uma garota humana, contra as
-                            circunstâncias devastadoras causadas por sua aquisição e uso de magia.
-                        </span>
-                    </div>
-                    <div class="div_txtInfoFilme">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
-
     <section id="hayao_miyazaki">
         <div class="div_tracoMiyazaki">
             <div class="tracoMiyazaki"></div>
@@ -352,7 +307,8 @@
         </div>
 
         <button id="btVermais" class="bt_preenchido buttons" onclick="verificarLogin()">Acessar Galeria
-            Completa</button>
+            Completa
+        </button>
     </section>
 
     <section id="jogo">
@@ -361,11 +317,14 @@
         <div class="container_conteudo">
             <div class="div_conteudoJogo">
                 <div class="div_textoJogo">
-                    Divirta-se com o jogo <br> <span>Ponyo Run!</span> <br>
+                    <span>Ponyo Run!</span> <br>
                     <div class="div_tracoJogo">
                         <div class="tracoJogo"></div>
                     </div>
-                    Ajude a Ponyo a pular pelas ondas, quando mais longe mais mágico o oceano se torna!
+                    Ajude a Ponyo a pular pelas ondas, quando mais longe mais mágico o oceano se torna! <br><br>
+                    <button id="bt" class="bt_preenchido buttons" onclick="verificarLoginJogo()">
+                        Acessar Jogo
+                    </button>
                 </div>
                 <div class="fotoJogo">
                     <video autoplay muted loop class="bg-videoJogo">
@@ -417,7 +376,7 @@
 
                         </span>
                         <br><br>
-                        
+
                     </div>
 
                 </div>
@@ -433,11 +392,10 @@
                 </div>
                 <div class="links_footerEsquerda">
                     <div><a href="#inicio">Início</a></div>
-                    <div><a href="#sobre_filme">Sobre o Filme</a></div> 
-                    <div><a href="#hayao_miyazaki">Hayao Miyazaki</a></div> 
-                    <div><a href="#galeria">Galeria</a></div> 
-                    <div><a href="#jogo">Jogo</a></div> 
-                    <!-- <div><a href="#">Doumentação</a></div> -->
+                    <div><a href="#sobre_filme">Sobre o Filme</a></div>
+                    <div><a href="#hayao_miyazaki">Hayao Miyazaki</a></div>
+                    <div><a href="#galeria">Galeria</a></div>
+                    <div><a href="#jogo">Jogo</a></div>
                 </div>
             </div>
             <div class="direitaTopo">
@@ -445,13 +403,14 @@
                     Contato
                 </div>
                 <div class="links_footer">
-                    <div>andre.corado.leao@gmail.com</div> 
+                    <div>andre.corado.leao@gmail.com</div>
                     <div>andre.leao@sptech.school</div>
                     <br><br>
                     <div id="repositorio">
-                        <a href="https://github.com/andreleao-sys/Projeto-Mundo-Ponyo.git" target="_blank">Repositório GitHub</a>
+                        <a href="https://github.com/andreleao-sys/Projeto-Mundo-Ponyo.git" target="_blank">Repositório
+                            GitHub</a>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="direitaTopo">
@@ -495,6 +454,21 @@
         console.log(sessionStorage);
         if (sessionStorage.length <= 1) {
             alert('Para ver mais fotos, faça seu cadastro!');
+            window.location.href = 'cadastro.html';
+        } else {
+            window.location.href = './dashboard/dashboard.html';
+        }
+    }
+
+    function verificarLoginJogo() {
+        var idUsuario = sessionStorage.getItem("ID_USUARIO");
+        var email = sessionStorage.getItem("EMAIL_USUARIO");
+        var nome = sessionStorage.getItem("NOME_USUARIO");
+
+        // console.log(idUsuario + email +  nome);
+        console.log(sessionStorage);
+        if (sessionStorage.length <= 1) {
+            alert('Para jogar a vontade. FAÇA SEU CADASTRO E DIVIRTA-SE 😄');
             window.location.href = 'cadastro.html';
         } else {
             window.location.href = './dashboard/dashboard.html';
